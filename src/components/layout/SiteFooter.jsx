@@ -8,12 +8,12 @@ const COLUMNS = [
   {
     title: 'Programmes',
     links: [
-      ...programmeFormats.map((f) => ({ label: f.title, to: `/programmes?format=${f.id}` })),
+      ...programmeFormats.map((f) => ({ label: f.title, to: f.path })),
       { label: 'All programmes', to: '/programmes' },
     ],
   },
-  { title: 'Career', links: careerLinks.map((c) => ({ label: c.title, to: `/career#${c.id}` })) },
-  { title: 'About Us', links: aboutLinks.map((a) => ({ label: a.title, to: `/about#${a.id}` })) },
+  { title: 'Career', links: careerLinks.map((c) => ({ label: c.title, to: c.path })) },
+  { title: 'About Us', links: aboutLinks.map((a) => ({ label: a.title, to: a.path })) },
 ];
 
 /** Site-wide footer. */

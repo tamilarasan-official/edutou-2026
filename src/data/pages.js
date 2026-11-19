@@ -65,6 +65,7 @@ export const about = {
   },
   partners: {
     lead: 'Institutions we have worked with.',
+    photo: '12', // Edutou trainers with college faculty
     body: 'We run programmes on campus with colleges and universities. Interested in bringing Edutou to your institution?',
     // Institution names come from `institutions` in site.js.
   },

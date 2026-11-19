@@ -13,7 +13,7 @@ function ProgrammesPanel({ onNavigate }) {
         <p className="edt-mega__label">Explore by learning format</p>
         <div className="edt-mega__grid">
           {programmeFormats.map((f) => (
-            <Link key={f.id} to={`/programmes?format=${f.id}`} className="edt-mega__item" onClick={onNavigate}>
+            <Link key={f.id} to={f.path} className="edt-mega__item" onClick={onNavigate}>
               <span className="edt-mega__no">{f.no}</span>
               <span>
                 <strong>{f.title}</strong>
@@ -44,7 +44,7 @@ function ListPanel({ base, items, allLabel, onNavigate }) {
   return (
     <div className="edt-drop">
       {items.map((it) => (
-        <Link key={it.id} to={`${base}#${it.id}`} className="edt-drop__item" onClick={onNavigate}>
+        <Link key={it.id} to={it.path} className="edt-drop__item" onClick={onNavigate}>
           <strong>{it.title}</strong>
           <small>{it.desc}</small>
         </Link>
@@ -64,17 +64,11 @@ const PANELS = {
 
 const MOBILE_GROUPS = {
   programmes: [
-    ...programmeFormats.map((f) => ({ label: f.title, to: `/programmes?format=${f.id}` })),
+    ...programmeFormats.map((f) => ({ label: f.title, to: f.path })),
     { label: 'All programmes', to: '/programmes' },
   ],
-  career: [
-    ...careerLinks.map((c) => ({ label: c.title, to: `/career#${c.id}` })),
-    { label: 'Career overview', to: '/career' },
-  ],
-  about: [
-    ...aboutLinks.map((a) => ({ label: a.title, to: `/about#${a.id}` })),
-    { label: 'About Edutou', to: '/about' },
-  ],
+  career: [...careerLinks.map((c) => ({ label: c.title, to: c.path })), { label: 'Career overview', to: '/career' }],
+  about: [...aboutLinks.map((a) => ({ label: a.title, to: a.path })), { label: 'About Edutou', to: '/about' }],
 };
 
 /** Site header: utility bar, main navigation with dropdowns, mobile menu. */

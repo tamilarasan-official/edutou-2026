@@ -43,6 +43,18 @@ export const aboutLinks = [
   { id: 'partners', title: 'Our Partners', desc: 'Institutions we work with' },
 ];
 
+// Every category item has its own page: /programmes/<id>, /career/<id>, /about/<id>
+programmeFormats.forEach((f) => (f.path = `/programmes/${f.id}`));
+careerLinks.forEach((c) => (c.path = `/career/${c.id}`));
+aboutLinks.forEach((a) => (a.path = `/about/${a.id}`));
+
+/** Section metadata, used for breadcrumbs and "more in this section" links. */
+export const sections = {
+  programmes: { label: 'Programmes', path: '/programmes', items: programmeFormats },
+  career: { label: 'Career', path: '/career', items: careerLinks },
+  about: { label: 'About Us', path: '/about', items: aboutLinks },
+};
+
 /** Main menu, in order. `menu` items open a dropdown. */
 export const mainNav = [
   { label: 'Home', to: '/' },

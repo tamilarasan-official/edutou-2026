@@ -32,7 +32,7 @@ port (80 for Dockerfile, 3000 for Nixpacks) on the domain.
 index.html                    page <head> (title, SEO / social meta, favicon) + #main mount point
 src/
   main.jsx                    entry; router + styles in cascade order
-  App.jsx                     routes: / /programmes /career /about /contact /verify-certificate
+  App.jsx                     routes: /, /programmes(/:format), /career(/:topic), /about(/:topic), /contact, /verify-certificate
   pages/                      one component per page (HomePage = the original design)
   components/
     layout/                   Navbar (utility bar, dropdowns, mobile menu), SiteFooter, Logo
