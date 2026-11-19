@@ -16,6 +16,16 @@ npm run preview   # serve the production build
 `dist/` is fully static and uses relative paths, so it can be hosted anywhere
 (Netlify, Vercel, GitHub Pages, any web server or sub-folder).
 
+## Deploy (Dokploy or any Docker host)
+
+- **Dockerfile build type (recommended):** builds the site and serves it with nginx
+  on port **80**.
+- **Nixpacks build type:** runs `npm run build` then `npm start`, which serves the
+  build on `$PORT` (default 3000).
+
+In Dokploy set the application's branch (e.g. `prod`) and the matching container
+port (80 for Dockerfile, 3000 for Nixpacks) on the domain.
+
 ## Structure
 
 ```
