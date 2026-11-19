@@ -1,6 +1,6 @@
 // Site-wide content for the Edutou-specific sections.
 
-export const CONTACT_EMAIL = '';
+export const CONTACT_EMAIL = 'info@edutou.in';
 
 export const institutions = ['Saveetha University', 'Madras Engineering College'];
 
