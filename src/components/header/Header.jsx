@@ -24,6 +24,15 @@ export default function Header() {
   }, []);
   const close = useCallback(() => setOpen(false), []);
 
+  // Scrolled state: lets the collapsed mobile/tablet nav get a backdrop (responsive.css).
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   // Expand animation when the menu opens.
   useLayoutEffect(() => {
     if (!open || closedHeight.current == null) return undefined;
@@ -60,7 +69,11 @@ export default function Header() {
   }, [open]);
 
   return (
-    <div ref={rootRef} className="framer-173048b-container" data-framer-layout-hint-center-x="true">
+    <div
+      ref={rootRef}
+      className={`framer-173048b-container${scrolled ? ' is-scrolled' : ''}`}
+      data-framer-layout-hint-center-x="true"
+    >
       <div className="ssr-variant hidden-s11egd hidden-10qoyt0">
         <DesktopNav />
       </div>

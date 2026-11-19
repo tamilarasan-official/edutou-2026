@@ -8,6 +8,7 @@ import './styles/breakpoints.css';
 import './styles/framer.css';
 import './styles/edutou.css';
 import './styles/enhancements.css';
+import './styles/responsive.css';
 
 // Framer's stylesheet targets #main, so the app mounts there.
 createRoot(document.getElementById('main')).render(

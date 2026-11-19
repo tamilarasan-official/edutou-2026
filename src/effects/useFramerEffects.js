@@ -97,9 +97,10 @@ const visible = (el) => el.getClientRects().length > 0;
  */
 function baseTransform(el) {
   const inline = el.style.transform;
-  // Centre-anchored layers carry Framer's centring prefix inline (no CSS transform).
+  // Centre-anchored (absolutely positioned) layers carry Framer's centring prefix
+  // inline, with no CSS transform. Elements in normal flow never need it.
   const prefix = /^(translate\(-50%, -50%\)|translateX\(-50%\)|translateY\(-50%\))/.exec(inline);
-  if (prefix) return prefix[1];
+  if (prefix && /^(absolute|fixed)$/.test(getComputedStyle(el).position)) return prefix[1];
   el.style.transform = '';
   const css = getComputedStyle(el).transform;
   el.style.transform = inline;

@@ -1,0 +1,122 @@
+/*
+ * Mobile / tablet fixes. Desktop (>= 1200px) is not affected by anything here.
+ * Breakpoints match the Framer design: tablet 810-1199.98px, phone <= 809.98px.
+ */
+
+/* ---- Header: glass backdrop once the page is scrolled (phone + tablet) ----
+   The collapsed mobile nav is fully transparent, so the logo and menu icon sat
+   directly on top of scrolling content. At the very top it stays transparent. */
+@media (max-width: 1199.98px) {
+  .framer-173048b-container nav[data-framer-name='Phone -Close'],
+  .framer-173048b-container nav[data-framer-name='Tablet - Close'] {
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  .framer-173048b-container.is-scrolled nav[data-framer-name='Phone -Close'],
+  .framer-173048b-container.is-scrolled nav[data-framer-name='Tablet - Close'] {
+    background: rgba(23, 23, 23, 0.82) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    backdrop-filter: blur(14px) !important;
+    border-radius: 0 !important;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+}
+
+@media (max-width: 1199.98px) {
+  /* ---- "From Values & Philosophy" was set to never wrap and ran off-screen ---- */
+  .framer-FwoPK .framer-18lr4bt {
+    white-space: normal;
+    width: 100%;
+  }
+
+  /* ---- "Learn with Confidence. Backed by Intelligence." ----
+     Was absolutely positioned and non-wrapping (704px wide), so it was cropped
+     and printed on top of / hidden behind the first bento card. Put it back in
+     normal flow above the cards. */
+  .framer-FwoPK .framer-ucjlgu {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    white-space: normal;
+    width: 100%;
+    max-width: 100%;
+    min-height: 0;
+  }
+
+  /* ---- Bento card 4 text box was fixed at 234x61px: cut off left/right on
+     tablet and at the bottom on phones. Let it size to its text. ---- */
+  .framer-FwoPK .framer-f6d2y6 .framer-12arjr7 {
+    width: 100%;
+    height: auto;
+  }
+
+}
+
+/* ---- Tablet footer: the copyright line was wider than its centred 316px
+   column and started off-screen. Left-align it under the links, one line. ---- */
+@media (min-width: 810px) and (max-width: 1199.98px) {
+  footer .framer-uim1xm {
+    align-items: flex-start !important;
+    width: 100% !important;
+  }
+  footer .framer-1hgm7v3 {
+    width: auto !important;
+    justify-content: flex-start !important;
+  }
+}
+
+@media (max-width: 809.98px) {
+  /* ---- "Smart Learning / Intelligence": lines were touching (line-height 1em) ---- */
+  .framer-FwoPK .framer-6ao2lu .framer-text {
+    line-height: 1.12 !important;
+  }
+  .framer-FwoPK .framer-6ao2lu {
+    margin-bottom: 6px;
+  }
+
+  /* ---- Benefit cards had fixed heights (170/182px); on narrow phones the text
+     wrapped onto an extra line and was clipped. Let them fit their text. ---- */
+  .framer-FwoPK .framer-yq5mik-container,
+  .framer-FwoPK .framer-cuu991-container,
+  .framer-FwoPK .framer-xbvzy9-container,
+  .framer-FwoPK .framer-1rn7ipq-container,
+  .framer-FwoPK .framer-17r2tkd-container,
+  .framer-FwoPK .framer-1h3xmn-container {
+    height: auto !important;
+  }
+  .framer-GeYn9 {
+    height: auto !important;
+    min-height: 170px;
+  }
+
+  /* ---- Breathing room between the institutions strip and the next heading ---- */
+  .edt-clients {
+    padding-bottom: 28px;
+  }
+
+  /* ---- Bigger tap areas (invisible) for small links ---- */
+  footer [data-framer-name='Services'] a.framer-text,
+  .framer-173048b-container a.framer-1t7g6pl {
+    position: relative;
+  }
+  footer [data-framer-name='Services'] a.framer-text::after,
+  .framer-173048b-container a.framer-1t7g6pl::after {
+    content: '';
+    position: absolute;
+    inset: -8px -20px;
+  }
+
+  /* ---- Back-to-top: smaller and tucked into the corner on phones ---- */
+  .edt-to-top {
+    width: 44px;
+    height: 44px;
+    right: 12px;
+    bottom: 14px;
+  }
+  .edt-to-top svg {
+    width: 40px;
+    height: 40px;
+  }
+}
