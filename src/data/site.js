@@ -1,6 +1,6 @@
 // Site-wide content for the Edutou-specific sections.
 
-export const CONTACT_EMAIL = 'himanshu@welocalhost.com';
+export const CONTACT_EMAIL = '';
 
 export const institutions = ['Saveetha University', 'Madras Engineering College'];
 

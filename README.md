@@ -29,36 +29,42 @@ port (80 for Dockerfile, 3000 for Nixpacks) on the domain.
 ## Structure
 
 ```
-index.html                    page <head> (title, SEO / social meta) + #main mount point
+index.html                    page <head> (title, SEO / social meta, favicon) + #main mount point
 src/
-  main.jsx                    entry; imports styles in cascade order
-  App.jsx                     page layout: section order lives here
+  main.jsx                    entry; router + styles in cascade order
+  App.jsx                     routes: / /programmes /career /about /contact /verify-certificate
+  pages/                      one component per page (HomePage = the original design)
   components/
-    header/Header.jsx         fixed nav; hamburger menu on tablet/phone
-    header/NavVariants.jsx    desktop / tablet / phone nav markup
-    sections/*.jsx            one component per page section
-    FaqItem.jsx               accordion row (data in src/data/faq.js)
-    Footer.jsx, DotPattern.jsx, SvgTemplates.jsx
+    layout/                   Navbar (utility bar, dropdowns, mobile menu), SiteFooter, Logo
+    page/PageParts.jsx        shared blocks for inner pages (hero, section heading, photos, CTA)
+    sections/*.jsx            homepage sections
+    fx/                       scroll progress, back-to-top, click sparks, spotlight, shiny text
+    FaqItem.jsx, Lightbox.jsx, DotPattern.jsx, SvgTemplates.jsx
   data/
+    navigation.js             menu structure (navbar, mobile menu and footer all use this)
+    programmes.js             programme catalogue on /programmes
+    pages.js                  Career and About page content
     site.js                   contact e-mail, institutions, gallery photos
     faq.js                    FAQ questions & answers
-  effects/
-    useFramerEffects.js       appear / scroll-reveal / loop / text animations
-    effectsConfig.json        animation settings taken from the Framer project
-    appearConfig.json         page-load animation settings (per breakpoint)
+  effects/                    homepage animations (settings taken from the Framer project)
   styles/
     framer.css, fonts.css, breakpoints.css   original design styles (verbatim)
-    edutou.css                Edutou sections + site-specific overrides
+    edutou.css, enhancements.css, responsive.css   homepage additions and mobile fixes
+    layout.css, pages.css     header/footer and inner pages
 public/images/                campus gallery photos
+public/brand/                 logo mark and wordmark
 legacy/index.html             the previous single-file HTML site, kept for reference
 ```
 
 ## Editing content
 
+- **Menu items:** `src/data/navigation.js`
+- **Programmes (catalogue, formats, domain filters):** `src/data/programmes.js`
+- **Career / About pages:** `src/data/pages.js` (items marked `TODO` need real details)
 - **Contact e-mail, institutions, gallery photos:** `src/data/site.js`
 - **FAQ:** `src/data/faq.js`
-- **Section text:** the matching file in `src/components/sections/`
-- **Section order:** `src/App.jsx`
+- **Homepage section text:** the matching file in `src/components/sections/`
+- **Homepage section order:** `src/pages/HomePage.jsx`
 
 ## Notes
 

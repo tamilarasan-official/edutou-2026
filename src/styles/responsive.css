@@ -3,26 +3,6 @@
  * Breakpoints match the Framer design: tablet 810-1199.98px, phone <= 809.98px.
  */
 
-/* ---- Header: glass backdrop once the page is scrolled (phone + tablet) ----
-   The collapsed mobile nav is fully transparent, so the logo and menu icon sat
-   directly on top of scrolling content. At the very top it stays transparent. */
-@media (max-width: 1199.98px) {
-  .framer-173048b-container nav[data-framer-name='Phone -Close'],
-  .framer-173048b-container nav[data-framer-name='Tablet - Close'] {
-    transition:
-      background-color 0.3s ease,
-      box-shadow 0.3s ease;
-  }
-  .framer-173048b-container.is-scrolled nav[data-framer-name='Phone -Close'],
-  .framer-173048b-container.is-scrolled nav[data-framer-name='Tablet - Close'] {
-    background: rgba(23, 23, 23, 0.82) !important;
-    -webkit-backdrop-filter: blur(14px) !important;
-    backdrop-filter: blur(14px) !important;
-    border-radius: 0 !important;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
-  }
-}
-
 @media (max-width: 1199.98px) {
   /* ---- "From Values & Philosophy" was set to never wrap and ran off-screen ---- */
   .framer-FwoPK .framer-18lr4bt {
@@ -50,20 +30,6 @@
   .framer-FwoPK .framer-f6d2y6 .framer-12arjr7 {
     width: 100%;
     height: auto;
-  }
-
-}
-
-/* ---- Tablet footer: the copyright line was wider than its centred 316px
-   column and started off-screen. Left-align it under the links, one line. ---- */
-@media (min-width: 810px) and (max-width: 1199.98px) {
-  footer .framer-uim1xm {
-    align-items: flex-start !important;
-    width: 100% !important;
-  }
-  footer .framer-1hgm7v3 {
-    width: auto !important;
-    justify-content: flex-start !important;
   }
 }
 
@@ -94,18 +60,6 @@
   /* ---- Breathing room between the institutions strip and the next heading ---- */
   .edt-clients {
     padding-bottom: 28px;
-  }
-
-  /* ---- Bigger tap areas (invisible) for small links ---- */
-  footer [data-framer-name='Services'] a.framer-text,
-  .framer-173048b-container a.framer-1t7g6pl {
-    position: relative;
-  }
-  footer [data-framer-name='Services'] a.framer-text::after,
-  .framer-173048b-container a.framer-1t7g6pl::after {
-    content: '';
-    position: absolute;
-    inset: -8px -20px;
   }
 
   /* ---- Back-to-top: smaller and tucked into the corner on phones ---- */

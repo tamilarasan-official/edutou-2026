@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  // Relative asset paths so the build works from any folder / sub-path.
-  base: './',
+  // Absolute asset paths: the site has client-side routes (/programmes, /about/...).
+  base: '/',
   // `npm start` serves the build with `vite preview`; allow any domain the host
   // (e.g. Dokploy) routes to it, otherwise Vite answers "Blocked request".
   preview: {
