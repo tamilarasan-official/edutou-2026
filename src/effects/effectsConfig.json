@@ -1,0 +1,1539 @@
+{
+ "reveals": [
+  {
+   "selector": ".framer-1uk34jx",
+   "name": "Supporting text",
+   "enter": {
+    "opacity": 0,
+    "scale": 1.2,
+    "transformPerspective": 1200,
+    "y": 80
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0.1,
+     "duration": 0.8,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-1inqsug",
+   "name": "Trusted",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 1,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "transition": {
+     "damping": 80,
+     "delay": 0,
+     "mass": 1,
+     "stiffness": 400,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-pmwh6r-container",
+   "enter": {
+    "opacity": 0,
+    "scale": 1.1,
+    "y": 80
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.1,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enabled": false
+   }
+  },
+  {
+   "selector": ".framer-18o74te",
+   "name": "Glow",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.1,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0
+    },
+    "opacity": 0.58
+   }
+  },
+  {
+   "selector": ".framer-16o3jbg",
+   "name": "Feature Visual",
+   "enabled": false,
+   "phone": {
+    "threshold": 0,
+    "target": null,
+    "opacity": 1,
+    "enabled": true,
+    "enter": {
+     "opacity": 0,
+     "y": 50
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 0.6,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-2xc4pj",
+   "name": "Container",
+   "enter": {
+    "opacity": 0,
+    "y": 100
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 80
+    }
+   }
+  },
+  {
+   "selector": ".framer-1hel76v-container",
+   "enter": {
+    "opacity": 0,
+    "y": 80
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.1,
+    "duration": 1.3,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 50
+    }
+   }
+  },
+  {
+   "selector": ".framer-ucjlgu",
+   "name": "Heading",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "target": ".framer-1rornw0",
+   "opacity": 1,
+   "phone": {
+    "enabled": false
+   }
+  },
+  {
+   "selector": ".framer-1a34rm4",
+   "name": "Container",
+   "enabled": false,
+   "phone": {
+    "threshold": 0,
+    "target": null,
+    "opacity": 1,
+    "enabled": true,
+    "enter": {
+     "opacity": 0,
+     "y": 80
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 0.8,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-12j8q25",
+   "name": "Heading & Supporting Text",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 1.3,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "target": ".framer-a7x13s",
+   "opacity": 1,
+   "phone": {
+    "transition": {
+     "damping": 80,
+     "delay": 0,
+     "mass": 1,
+     "stiffness": 400,
+     "type": "spring"
+    },
+    "threshold": 0,
+    "target": null
+   }
+  },
+  {
+   "selector": ".framer-1enqwk5",
+   "name": "Chart Cursor",
+   "enter": {
+    "opacity": 0,
+    "x": -300
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.2,
+    "duration": 1.3,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "x": -80
+    },
+    "threshold": 0
+   }
+  },
+  {
+   "selector": ".framer-dm72fi",
+   "name": "Visual",
+   "enter": {
+    "opacity": 0,
+    "y": 100
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.2,
+    "duration": 1.3,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "scale": 0.9,
+     "y": 50
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 0.8,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-64b7uw",
+   "name": "Card 1",
+   "enter": {
+    "opacity": 0,
+    "y": 100
+   },
+   "transition": {
+    "damping": 80,
+    "delay": 0,
+    "mass": 1,
+    "stiffness": 400,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "target": ".framer-a7x13s",
+   "opacity": 1,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 50
+    },
+    "threshold": 0,
+    "target": null
+   }
+  },
+  {
+   "selector": ".framer-59ugsm",
+   "name": "Heading & Supporting Text",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 1.3,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "target": ".framer-a7x13s",
+   "opacity": 1,
+   "phone": {
+    "transition": {
+     "damping": 80,
+     "delay": 0,
+     "mass": 1,
+     "stiffness": 400,
+     "type": "spring"
+    },
+    "threshold": 0,
+    "target": null
+   }
+  },
+  {
+   "selector": ".framer-1thzg3c",
+   "name": "Visual",
+   "enter": {
+    "opacity": 0,
+    "y": 100
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.1,
+    "duration": 1.3,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 50
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 0.8,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-x161et",
+   "name": "Card 2",
+   "enter": {
+    "opacity": 0,
+    "y": 100
+   },
+   "transition": {
+    "damping": 80,
+    "delay": 0,
+    "mass": 1,
+    "stiffness": 400,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "target": ".framer-a7x13s",
+   "opacity": 1,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 50
+    },
+    "threshold": 0,
+    "target": null
+   }
+  },
+  {
+   "selector": ".framer-v1b3vc",
+   "name": "Heading & Supporting Text",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 1.3,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "target": ".framer-a7x13s",
+   "opacity": 1,
+   "phone": {
+    "transition": {
+     "damping": 80,
+     "delay": 0,
+     "mass": 1,
+     "stiffness": 400,
+     "type": "spring"
+    },
+    "threshold": 0,
+    "target": null
+   }
+  },
+  {
+   "selector": ".framer-1bhioqt",
+   "name": "Card 3 Visual",
+   "enter": {
+    "opacity": 0,
+    "scale": 0.8
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enabled": false
+   }
+  },
+  {
+   "selector": ".framer-pdtm65",
+   "name": "Visual",
+   "enter": {
+    "opacity": 0,
+    "y": 100
+   },
+   "transition": {
+    "damping": 80,
+    "delay": 0.2,
+    "mass": 1,
+    "stiffness": 400,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 50
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 0.8,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-5hufie",
+   "name": "Card 3",
+   "enter": {
+    "opacity": 0,
+    "y": 100
+   },
+   "transition": {
+    "damping": 80,
+    "delay": 0,
+    "mass": 1,
+    "stiffness": 400,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "target": ".framer-a7x13s",
+   "opacity": 1,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 50
+    },
+    "threshold": 0,
+    "target": null
+   }
+  },
+  {
+   "selector": ".framer-scppo6",
+   "name": "Heading & Supporting Text",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 1.3,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "target": ".framer-a7x13s",
+   "opacity": 1,
+   "phone": {
+    "transition": {
+     "damping": 80,
+     "delay": 0,
+     "mass": 1,
+     "stiffness": 400,
+     "type": "spring"
+    },
+    "threshold": 0,
+    "target": null
+   }
+  },
+  {
+   "selector": ".framer-14u8252",
+   "name": "Glow",
+   "enter": {
+    "opacity": 0,
+    "y": 100
+   },
+   "transition": {
+    "damping": 80,
+    "delay": 0.2,
+    "mass": 1,
+    "stiffness": 400,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0.2,
+     "duration": 1.3,
+     "type": "spring"
+    },
+    "opacity": 0.83
+   }
+  },
+  {
+   "selector": ".framer-oepu20",
+   "name": "Down",
+   "enter": {
+    "opacity": 1,
+    "y": 100
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.2,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 1,
+     "scale": 0.8,
+     "y": 100
+    },
+    "transformTemplate": "translate(-50%, -50%)"
+   }
+  },
+  {
+   "selector": ".framer-hlgyxm",
+   "name": "Up",
+   "enter": {
+    "opacity": 1,
+    "y": 100
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.1,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "transformTemplate": "translate(-50%, -50%)",
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 1,
+     "scale": 0.8,
+     "y": 80
+    }
+   }
+  },
+  {
+   "selector": ".framer-1f3siy9",
+   "name": "Visual",
+   "enter": {
+    "opacity": 0,
+    "y": 100
+   },
+   "transition": {
+    "damping": 80,
+    "delay": 0.2,
+    "mass": 1,
+    "stiffness": 400,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 50
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 0.8,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-f6d2y6",
+   "name": "Card 4",
+   "enter": {
+    "opacity": 0,
+    "y": 100
+   },
+   "transition": {
+    "damping": 80,
+    "delay": 0,
+    "mass": 1,
+    "stiffness": 400,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "target": ".framer-a7x13s",
+   "opacity": 1,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 50
+    },
+    "threshold": 0,
+    "target": null
+   }
+  },
+  {
+   "selector": ".framer-5vqxku",
+   "name": "Up Image",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.1,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "opacity": 1,
+   "target": null
+  },
+  {
+   "selector": ".framer-waj8fc",
+   "name": "Down Image",
+   "enter": {
+    "opacity": 0,
+    "y": 100
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.2,
+    "duration": 1.3,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "opacity": 1,
+   "target": null
+  },
+  {
+   "selector": ".framer-x2jc28",
+   "name": "Visual",
+   "enter": {
+    "opacity": 0,
+    "y": 100
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 1.3,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "opacity": 1,
+   "target": null,
+   "tablet": {
+    "transition": {
+     "damping": 80,
+     "delay": 0.1,
+     "mass": 1,
+     "stiffness": 400,
+     "type": "spring"
+    }
+   },
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 50
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0.1,
+     "duration": 0.5,
+     "type": "spring"
+    },
+    "threshold": 0
+   }
+  },
+  {
+   "selector": ".framer-y7c7yi",
+   "name": "Heading & Supporting Text",
+   "enter": {
+    "opacity": 0,
+    "y": 100
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 80
+    }
+   }
+  },
+  {
+   "selector": ".framer-tprnz6-container",
+   "enter": {
+    "opacity": 0,
+    "y": 80
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.1,
+    "duration": 1.3,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null
+  },
+  {
+   "selector": ".framer-8whcqk",
+   "name": "Glow",
+   "enter": {
+    "opacity": 0,
+    "y": 80
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.1,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "opacity": 0.66,
+   "target": null,
+   "phone": {
+    "opacity": 0.58
+   }
+  },
+  {
+   "selector": ".framer-17r4xyy",
+   "name": "Glow",
+   "enter": {
+    "opacity": 0,
+    "scale": 1.1,
+    "y": 80
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 0.8,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 80
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 1,
+     "type": "spring"
+    },
+    "opacity": 0.58
+   }
+  },
+  {
+   "selector": ".framer-1gd1sx2",
+   "name": "Heading",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enabled": false
+   }
+  },
+  {
+   "selector": ".framer-w9tee5",
+   "name": "Heading",
+   "enabled": false,
+   "phone": {
+    "threshold": 0,
+    "target": null,
+    "opacity": 1,
+    "enabled": true,
+    "enter": {
+     "opacity": 0,
+     "y": 80
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 0.8,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-yq5mik-container",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 80
+    }
+   }
+  },
+  {
+   "selector": ".framer-cuu991-container",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.1,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 80
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 0.8,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-xbvzy9-container",
+   "enter": {
+    "opacity": 0,
+    "scale": 0.7,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.2,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 80
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 0.8,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-1rn7ipq-container",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.3,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 80
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 0.8,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-17r2tkd-container",
+   "enter": {
+    "opacity": 0,
+    "scale": 0.9,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.4,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 80
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 0.8,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-1h3xmn-container",
+   "enter": {
+    "opacity": 0,
+    "scale": 0.9,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.5,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 80
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 0.8,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-1mo0pmr",
+   "name": "Heading",
+   "enabled": false,
+   "tablet": {
+    "threshold": 0,
+    "target": null,
+    "opacity": 1,
+    "enabled": true,
+    "enter": {
+     "opacity": 0,
+     "scale": 1.1,
+     "y": 100
+    },
+    "transition": {
+     "damping": 60,
+     "delay": 0,
+     "mass": 1,
+     "stiffness": 300,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-1xlkw8a",
+   "name": "Supporting text",
+   "enabled": false,
+   "tablet": {
+    "threshold": 0,
+    "target": null,
+    "opacity": 0.8,
+    "enabled": true,
+    "enter": {
+     "opacity": 0,
+     "scale": 1.2,
+     "transformPerspective": 1200,
+     "y": 50
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0.1,
+     "duration": 0.8,
+     "type": "spring"
+    }
+   }
+  },
+  {
+   "selector": ".framer-17mgpcj",
+   "name": "Heading & Supporting Text",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "damping": 80,
+    "delay": 0,
+    "mass": 1,
+    "stiffness": 400,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 80
+    },
+    "transition": {
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 0.8,
+     "type": "spring"
+    },
+    "threshold": 0
+   }
+  },
+  {
+   "selector": ".framer-at0vw2",
+   "name": "Glow",
+   "enter": {
+    "opacity": 0,
+    "scale": 1.1,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 1,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 0.66,
+   "target": null
+  },
+  {
+   "selector": ".framer-1kj9rp9",
+   "name": "Heading & Supporting Text",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "target": ".framer-1fvnu53",
+   "opacity": 1,
+   "tablet": {
+    "transition": {
+     "damping": 80,
+     "delay": 0.1,
+     "mass": 1,
+     "stiffness": 400,
+     "type": "spring"
+    },
+    "threshold": 0,
+    "target": null
+   },
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 80
+    },
+    "threshold": 0,
+    "target": null
+   }
+  },
+  {
+   "selector": ".framer-1i3s4lk-container",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.1,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "target": ".framer-1fvnu53",
+   "opacity": 1,
+   "tablet": {
+    "threshold": 0,
+    "target": null
+   },
+   "phone": {
+    "target": null
+   }
+  },
+  {
+   "selector": ".framer-1o742yd-container",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.1,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "target": ".framer-1fvnu53",
+   "opacity": 1,
+   "tablet": {
+    "threshold": 0,
+    "target": null
+   },
+   "phone": {
+    "target": null
+   }
+  },
+  {
+   "selector": ".framer-1humiq1-container",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0.1,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0.5,
+   "target": ".framer-1fvnu53",
+   "opacity": 1,
+   "tablet": {
+    "threshold": 0,
+    "target": null
+   },
+   "phone": {
+    "target": null
+   }
+  },
+  {
+   "selector": ".framer-11gl5ow",
+   "name": "Heading",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "tablet": {
+    "threshold": 0.5
+   },
+   "phone": {
+    "enter": {
+     "opacity": 0,
+     "y": 80
+    }
+   }
+  },
+  {
+   "selector": ".framer-2kt7vz-container",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "damping": 80,
+    "delay": 0,
+    "mass": 1,
+    "stiffness": 400,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null,
+   "phone": {
+    "threshold": 0.5
+   }
+  },
+  {
+   "selector": ".framer-sl7xtq-container",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "damping": 80,
+    "delay": 0,
+    "mass": 1,
+    "stiffness": 400,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null
+  },
+  {
+   "selector": ".framer-rbfuiu-container",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "damping": 80,
+    "delay": 0,
+    "mass": 1,
+    "stiffness": 400,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null
+  },
+  {
+   "selector": ".framer-1aycwz7-container",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "damping": 80,
+    "delay": 0,
+    "mass": 1,
+    "stiffness": 400,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null
+  },
+  {
+   "selector": ".framer-1avwg4x-container",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "damping": 80,
+    "delay": 0,
+    "mass": 1,
+    "stiffness": 400,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null
+  },
+  {
+   "selector": ".framer-1771gfq",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null
+  },
+  {
+   "selector": ".framer-ybsbx3",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 0.9,
+   "target": null
+  },
+  {
+   "selector": ".framer-pcdke3-container",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null
+  },
+  {
+   "selector": ".framer-q3918f",
+   "name": "CTA",
+   "enter": {
+    "opacity": 0,
+    "y": 50
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.8,
+    "type": "spring"
+   },
+   "threshold": 0,
+   "opacity": 1,
+   "target": null
+  }
+ ],
+ "loops": [
+  {
+   "selector": ".framer-m38qto",
+   "to": {
+    "opacity": 1,
+    "x": 198
+   },
+   "transition": {
+    "bounce": 0.1,
+    "delay": 0,
+    "duration": 0.9,
+    "type": "spring"
+   },
+   "repeatType": "mirror",
+   "repeatDelay": 0,
+   "pauseOffscreen": true
+  },
+  {
+   "selector": ".framer-5s020z",
+   "name": "Shimmer Left",
+   "to": {
+    "opacity": 0,
+    "y": -800
+   },
+   "transition": {
+    "delay": 0,
+    "duration": 1,
+    "ease": [
+     0.12,
+     0.23,
+     0.5,
+     1
+    ],
+    "type": "tween"
+   },
+   "repeatType": "loop",
+   "repeatDelay": 1,
+   "pauseOffscreen": false
+  },
+  {
+   "selector": ".framer-f196iw",
+   "name": "Shimmer Right",
+   "to": {
+    "opacity": 0,
+    "y": -500
+   },
+   "transition": {
+    "delay": 0,
+    "duration": 1.2,
+    "ease": [
+     0.12,
+     0.23,
+     0.5,
+     1
+    ],
+    "type": "tween"
+   },
+   "repeatType": "loop",
+   "repeatDelay": 1.5,
+   "pauseOffscreen": false
+  },
+  {
+   "selector": ".framer-ju2czo",
+   "name": "Shimmer Left side",
+   "to": {
+    "opacity": 0,
+    "y": -450
+   },
+   "transition": {
+    "delay": 0,
+    "duration": 1.5,
+    "ease": [
+     0.12,
+     0.23,
+     0.5,
+     1
+    ],
+    "type": "tween"
+   },
+   "repeatType": "loop",
+   "repeatDelay": 0.2,
+   "pauseOffscreen": false
+  }
+ ],
+ "textEffects": [
+  {
+   "selector": ".framer-1uk34jx",
+   "name": "Hero supporting text",
+   "trigger": "mount",
+   "from": {
+    "filter": "blur(10px)",
+    "opacity": 0.001,
+    "y": 10
+   },
+   "startDelay": 0,
+   "transition": {
+    "type": "spring",
+    "bounce": 0,
+    "delay": 0.05,
+    "duration": 0.5
+   },
+   "phone": {
+    "transition": {
+     "type": "spring",
+     "bounce": 0.1,
+     "delay": 0,
+     "duration": 0.5
+    }
+   }
+  },
+  {
+   "selector": ".framer-18v5tzb",
+   "name": "Trusted already by",
+   "trigger": "inView",
+   "from": {
+    "opacity": 0.001,
+    "y": 10
+   },
+   "startDelay": 0,
+   "transition": {
+    "type": "spring",
+    "damping": 80,
+    "stiffness": 400,
+    "mass": 1,
+    "delay": 0.075
+   }
+  }
+ ]
+}
