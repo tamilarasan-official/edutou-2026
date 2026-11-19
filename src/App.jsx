@@ -7,16 +7,25 @@ import IntroSection from './components/sections/IntroSection.jsx';
 import BentoSection from './components/sections/BentoSection.jsx';
 import FeatureSection from './components/sections/FeatureSection.jsx';
 import BenefitSection from './components/sections/BenefitSection.jsx';
+import ProgramsMarquee from './components/sections/ProgramsMarquee.jsx';
 import CampusGallery from './components/sections/CampusGallery.jsx';
 import FaqSection from './components/sections/FaqSection.jsx';
 import Footer from './components/Footer.jsx';
 import DotPattern from './components/DotPattern.jsx';
 import SvgTemplates from './components/SvgTemplates.jsx';
+import ScrollProgress from './components/fx/ScrollProgress.jsx';
+import ClickSpark from './components/fx/ClickSpark.jsx';
+import BackToTop from './components/fx/BackToTop.jsx';
+import useSpotlight from './components/fx/useSpotlight.js';
 import useFramerEffects from './effects/useFramerEffects.js';
+
+// Cards that get the cursor spotlight (bento cards, benefit cards, FAQ rows)
+const SPOTLIGHT_CARDS = '.framer-64b7uw, .framer-x161et, .framer-5hufie, .framer-f6d2y6, .framer-GeYn9, .framer-cfihB';
 
 export default function App() {
   const rootRef = useRef(null);
   useFramerEffects(rootRef);
+  useSpotlight(rootRef, SPOTLIGHT_CARDS);
 
   return (
     <>
@@ -40,6 +49,7 @@ export default function App() {
           <BentoSection />
           <FeatureSection />
           <BenefitSection />
+          <ProgramsMarquee />
           <CampusGallery />
           <FaqSection />
         </div>
@@ -49,6 +59,9 @@ export default function App() {
         <DotPattern />
       </div>
       <SvgTemplates />
+      <ScrollProgress />
+      <BackToTop />
+      <ClickSpark />
     </>
   );
 }

@@ -4,6 +4,33 @@ export const CONTACT_EMAIL = 'himanshu@welocalhost.com';
 
 export const institutions = ['Saveetha University', 'Madras Engineering College'];
 
+// "What we teach" marquee. Taken from Edutou's program brochures
+// (BootUp 3-day Vibe Coding bootcamp, Data Science & Generative AI program)
+// and the work shown in the campus photos.
+export const programTracks = [
+  'Vibe Coding Bootcamp',
+  'Generative AI',
+  'Data Science',
+  'Prompt Engineering',
+  'AI Agents',
+  'Machine Learning',
+  'LLMs & RAG',
+  'PCB & Hardware Design',
+  'System Design',
+  'MLOps & Deployment',
+];
+export const programSessions = [
+  'Think Like a Builder',
+  'Logic Over Luck: Decode Prompting',
+  'From Prototype to Production',
+  'The Art of the Demo: Deploy or Die',
+  'Toolbox of a Developer',
+  'Python & SQL',
+  'Cursor',
+  'Lovable',
+  'Emergent',
+];
+
 // Campus gallery photos (public/images/gallery-XX.jpg). w/h are the intrinsic
 // pixel sizes, used for masonry balancing and to avoid layout shift.
 export const galleryPhotos = [

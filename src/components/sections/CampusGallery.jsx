@@ -1,5 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { galleryPhotos } from '../../data/site.js';
+import ShinyText from '../fx/ShinyText.jsx';
+import Lightbox from '../Lightbox.jsx';
 
 const columnsFor = (width) => (width >= 1000 ? 3 : 2);
 
@@ -37,9 +39,23 @@ function useColumnCount() {
   return count;
 }
 
-function Photo({ p, hidden }) {
+function Photo({ p, hidden, onOpen }) {
+  const open = () => onOpen(p);
+  const onKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      open();
+    }
+  };
   return (
-    <figure aria-hidden={hidden || undefined}>
+    <figure
+      aria-hidden={hidden || undefined}
+      role={hidden ? undefined : 'button'}
+      tabIndex={hidden ? -1 : 0}
+      aria-label={hidden ? undefined : `View photo: ${p.alt}`}
+      onClick={open}
+      onKeyDown={hidden ? undefined : onKeyDown}
+    >
       <img
         src={`${import.meta.env.BASE_URL}images/gallery-${p.k}.jpg`}
         alt={hidden ? '' : p.alt}
@@ -56,7 +72,7 @@ function Photo({ p, hidden }) {
  * One endlessly scrolling column. The photos are rendered twice and the track
  * moves up by exactly one copy, so the loop is seamless.
  */
-function ScrollingColumn({ photos, speed }) {
+function ScrollingColumn({ photos, speed, onOpen }) {
   const trackRef = useRef(null);
   const [duration, setDuration] = useState(0);
 
@@ -73,10 +89,10 @@ function ScrollingColumn({ photos, speed }) {
     <div className="edt-col">
       <div className="edt-track" ref={trackRef} style={duration ? { animationDuration: `${duration}s` } : undefined}>
         {photos.map((p) => (
-          <Photo key={p.k} p={p} />
+          <Photo key={p.k} p={p} onOpen={onOpen} />
         ))}
         {photos.map((p) => (
-          <Photo key={`${p.k}-loop`} p={p} hidden />
+          <Photo key={`${p.k}-loop`} p={p} hidden onOpen={onOpen} />
         ))}
       </div>
     </div>
@@ -87,12 +103,16 @@ function ScrollingColumn({ photos, speed }) {
 export default function CampusGallery() {
   const count = useColumnCount();
   const columns = useMemo(() => distribute(galleryPhotos, count), [count]);
+  const [openIndex, setOpenIndex] = useState(null);
+  const onOpen = (p) => setOpenIndex(galleryPhotos.indexOf(p));
 
   return (
     <section className="edt-gallery" data-framer-name="Campus Gallery">
       <div className="edt-gallery__inner">
         <div className="edt-gallery__head">
-          <span className="edt-eyebrow">On the ground</span>
+          <span className="edt-eyebrow">
+            <ShinyText>On the ground</ShinyText>
+          </span>
           <h2 className="edt-gallery__title">Inside the Edutou classroom</h2>
           <p className="edt-gallery__sub">
             Real students, real campuses. Hands-on AI learning with our teams at Saveetha University, Madras Engineering
@@ -101,10 +121,11 @@ export default function CampusGallery() {
         </div>
         <div className="edt-cols edt-marquee">
           {columns.map((col, i) => (
-            <ScrollingColumn key={`${count}-${i}`} photos={col} speed={SPEEDS[i % SPEEDS.length]} />
+            <ScrollingColumn key={`${count}-${i}`} photos={col} speed={SPEEDS[i % SPEEDS.length]} onOpen={onOpen} />
           ))}
         </div>
       </div>
+      <Lightbox photos={galleryPhotos} index={openIndex} onChange={setOpenIndex} onClose={() => setOpenIndex(null)} />
     </section>
   );
 }

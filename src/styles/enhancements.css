@@ -1,0 +1,429 @@
+/*
+ * Visual enhancements layered on top of the original design.
+ * Patterns adapted from React Bits / 21st.dev / Magic UI (ScrollProgress,
+ * SpotlightCard, BorderBeam, ShinyText, Marquee, ClickSpark), restyled in the
+ * site's palette: #171717 background, rgb(255, 94, 0) accent.
+ */
+
+@property --edt-beam-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* ---- Scroll progress bar ---- */
+.edt-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #ff4d00, #ff9a3d);
+  box-shadow: 0 0 10px rgba(255, 77, 0, 0.6);
+  z-index: 60;
+  pointer-events: none;
+}
+
+/* ---- Click sparks ---- */
+.edt-click-spark {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ---- Spotlight cards (bento, benefits, FAQ) ---- */
+@media (hover: hover) and (pointer: fine) {
+  .framer-64b7uw::before,
+  .framer-x161et::before,
+  .framer-5hufie::before,
+  .framer-f6d2y6::before,
+  .framer-GeYn9::before,
+  .framer-cfihB::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    background: radial-gradient(
+      420px circle at var(--edt-mx, 50%) var(--edt-my, 50%),
+      rgba(255, 94, 0, 0.16),
+      transparent 60%
+    );
+    mix-blend-mode: screen;
+  }
+  .framer-64b7uw:hover::before,
+  .framer-x161et:hover::before,
+  .framer-5hufie:hover::before,
+  .framer-f6d2y6:hover::before,
+  .framer-GeYn9:hover::before,
+  .framer-cfihB:hover::before {
+    opacity: 1;
+  }
+}
+
+/* ---- Shiny text ---- */
+.edt-shiny {
+  --edt-shine-base: currentColor;
+  --edt-shine-hi: #fff;
+  background: linear-gradient(
+    110deg,
+    var(--edt-shine-base) 40%,
+    var(--edt-shine-hi) 50%,
+    var(--edt-shine-base) 60%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: edt-shine 3.6s linear infinite;
+}
+.edt-eyebrow .edt-shiny {
+  --edt-shine-base: rgb(255, 94, 0);
+  --edt-shine-hi: #ffe1cf;
+}
+.edt-clients__label.edt-shiny {
+  --edt-shine-base: rgba(255, 255, 255, 0.42);
+  --edt-shine-hi: rgba(255, 255, 255, 0.95);
+}
+@keyframes edt-shine {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -50% 0;
+  }
+}
+
+/* ---- Border beam on the institution chips ---- */
+.edt-beam {
+  position: relative;
+  isolation: isolate;
+}
+.edt-beam::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--edt-beam-angle),
+    transparent 0deg 250deg,
+    rgba(255, 140, 60, 0.95) 330deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: edt-beam-spin 4s linear infinite;
+  animation-delay: var(--edt-beam-delay, 0s);
+  pointer-events: none;
+}
+@keyframes edt-beam-spin {
+  to {
+    --edt-beam-angle: 360deg;
+  }
+}
+
+/* ---- "What we teach" programs marquee ---- */
+.edt-programs {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgb(23, 23, 23);
+  padding: 90px 0 20px;
+  font-family: inherit;
+  position: relative;
+  z-index: 1;
+}
+.edt-programs .edt-gallery__head {
+  padding: 0 20px;
+}
+.edt-programs__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.edt-programs__row {
+  --edt-gap: 14px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
+}
+.edt-programs__track {
+  display: flex;
+  gap: var(--edt-gap);
+  width: max-content;
+  padding: 2px 0;
+  animation: edt-marquee-x 46s linear infinite;
+}
+.edt-programs__track.is-reverse {
+  animation-direction: reverse;
+}
+.edt-programs__rows:hover .edt-programs__track {
+  animation-play-state: paused;
+}
+@keyframes edt-marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - var(--edt-gap) / 2));
+  }
+}
+.edt-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 13px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    border-color 0.25s,
+    background 0.25s;
+}
+.edt-pill:hover {
+  border-color: rgba(255, 94, 0, 0.55);
+  background: rgba(255, 94, 0, 0.07);
+}
+.edt-pill__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgb(255, 94, 0);
+  box-shadow: 0 0 8px rgba(255, 94, 0, 0.8);
+  flex: none;
+}
+@media (max-width: 560px) {
+  .edt-programs {
+    padding-top: 60px;
+  }
+  .edt-programs__row {
+    --edt-gap: 10px;
+  }
+  .edt-programs__rows {
+    gap: 10px;
+  }
+  .edt-pill {
+    font-size: 14px;
+    padding: 11px 18px;
+  }
+}
+
+/* ---- Gallery: photos open in the lightbox ---- */
+.edt-cols figure {
+  cursor: zoom-in;
+}
+.edt-cols figure:focus-visible {
+  outline: 2px solid rgb(255, 94, 0);
+  outline-offset: 3px;
+}
+
+/* ---- Lightbox ---- */
+.edt-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 80px;
+  background: rgba(10, 10, 10, 0.84);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-family: 'Inter', 'Inter Placeholder', sans-serif;
+}
+.edt-lightbox__figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  max-width: min(1200px, 100%);
+}
+.edt-lightbox__figure img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 170px);
+  width: auto;
+  height: auto;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(255, 77, 0, 0.12);
+}
+.edt-lightbox figcaption {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 15px;
+  text-align: center;
+}
+.edt-lightbox__count {
+  color: rgb(255, 94, 0);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.edt-lightbox__btn {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(28, 28, 28, 0.7);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+.edt-lightbox__btn:hover {
+  border-color: rgba(255, 94, 0, 0.7);
+  background: rgba(255, 94, 0, 0.12);
+}
+.edt-lightbox__btn:focus-visible {
+  outline: 2px solid rgb(255, 94, 0);
+  outline-offset: 3px;
+}
+.edt-lightbox__btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.edt-lightbox__close {
+  top: 20px;
+  right: 20px;
+}
+.edt-lightbox__prev,
+.edt-lightbox__next {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.edt-lightbox__prev {
+  left: 20px;
+}
+.edt-lightbox__next {
+  right: 20px;
+}
+@media (max-width: 640px) {
+  .edt-lightbox {
+    padding: 64px 12px 96px;
+  }
+  .edt-lightbox__prev,
+  .edt-lightbox__next {
+    top: auto;
+    bottom: 24px;
+    transform: none;
+  }
+  .edt-lightbox__prev {
+    left: calc(50% - 58px);
+  }
+  .edt-lightbox__next {
+    right: calc(50% - 58px);
+  }
+}
+
+/* ---- Back to top ---- */
+.edt-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 94, 0, 0.35);
+  background: rgba(23, 23, 23, 0.72);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.45),
+    0 0 18px rgba(255, 77, 0, 0.18);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 55;
+  opacity: 0;
+  transform: translateY(16px) scale(0.9);
+  pointer-events: none;
+  transition:
+    opacity 0.3s,
+    transform 0.3s,
+    border-color 0.25s;
+}
+.edt-to-top.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.edt-to-top:hover {
+  border-color: rgba(255, 94, 0, 0.8);
+}
+.edt-to-top:focus-visible {
+  outline: 2px solid rgb(255, 94, 0);
+  outline-offset: 3px;
+}
+.edt-to-top svg {
+  width: 48px;
+  height: 48px;
+  overflow: visible;
+}
+.edt-to-top__track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 2;
+}
+.edt-to-top__ring {
+  fill: none;
+  stroke: rgb(255, 94, 0);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.edt-to-top__arrow {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (max-width: 560px) {
+  .edt-to-top {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+/* ---- Respect "reduce motion" ---- */
+@media (prefers-reduced-motion: reduce) {
+  .edt-shiny,
+  .edt-beam::before,
+  .edt-programs__track {
+    animation: none;
+  }
+  .edt-programs__row {
+    overflow-x: auto;
+  }
+}
