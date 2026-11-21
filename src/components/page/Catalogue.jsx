@@ -6,13 +6,18 @@ import { domains, mailto, programmeFormats } from '../../data/navigation.js';
 import { programmes } from '../../data/programmes.js';
 
 export const formatTitle = (id) => programmeFormats.find((f) => f.id === id)?.title ?? id;
-export const programmeCount = (formatId) => programmes.filter((p) => p.format === formatId).length;
+export const inFormat = (p, formatId) => p.format === formatId || (p.alsoIn ?? []).includes(formatId);
+export const programmeCount = (formatId) => programmes.filter((p) => inFormat(p, formatId)).length;
 
 export function ProgrammeCard({ p }) {
   return (
     <article className="edt-card edt-prog">
       <div className="edt-prog__top">
-        <span className="edt-tag edt-tag--accent">{formatTitle(p.format)}</span>
+        {[p.format, ...(p.alsoIn ?? [])].map((f) => (
+          <span key={f} className="edt-tag edt-tag--accent">
+            {formatTitle(f)}
+          </span>
+        ))}
         {p.domains.map((d) => (
           <span key={d} className="edt-tag">
             {d}
@@ -31,6 +36,24 @@ export function ProgrammeCard({ p }) {
         <p className="edt-prog__tools">
           Tools: <span>{p.tools.join(', ')}</span>
         </p>
+      )}
+      {p.details && (
+        <details className="edt-prog__more">
+          <summary>Roles &amp; live projects</summary>
+          <p className="edt-prog__sub">Roles you can grow into</p>
+          <ul className="edt-prog__list">
+            {p.details.roles.map((r) => (
+              <li key={r}>{r}</li>
+            ))}
+          </ul>
+          <p className="edt-prog__sub">Sample live projects</p>
+          <ul className="edt-prog__list">
+            {p.details.projects.map((r) => (
+              <li key={r}>{r}</li>
+            ))}
+          </ul>
+          {p.details.note && <p className="edt-prog__note">{p.details.note}</p>}
+        </details>
       )}
       <a className="edt-btn edt-btn--primary edt-prog__cta" href={mailto(`Enquiry: ${p.title}`)}>
         Enquire / Enrol <ArrowUpRight />
@@ -83,7 +106,7 @@ export default function Catalogue({ fixedFormat, title = 'Programme catalogue', 
   const results = useMemo(
     () =>
       programmes.filter(
-        (p) => (format === 'all' || p.format === format) && (domain === 'all' || p.domains.includes(domain)),
+        (p) => (format === 'all' || inFormat(p, format)) && (domain === 'all' || p.domains.includes(domain)),
       ),
     [format, domain],
   );
