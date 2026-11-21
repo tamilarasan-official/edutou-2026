@@ -56,7 +56,7 @@ export const about = {
     name: 'Dr. Annie Grace Vimala',
     tagline: 'The educator who decided to',
     highlight: 'rethink education.',
-    photo: '/team/annie-grace-vimala.jpg',
+    photo: '/team/annie-grace-vimala-portrait.jpg',
     stats: [
       { value: '25+', label: 'Years of experience' },
       { value: 'Principal', label: 'Of a well-known engineering college' },
