@@ -112,13 +112,22 @@ function Team() {
       <div className="edt-container">
         <CeoTeaser />
       </div>
-      <div className="edt-container edt-team-split">
-        <div className="edt-team-intro">
-          <SectionHead title={about.team.lead} />
-          <p className="edt-body">{about.team.body}</p>
-        </div>
-        <Photos keys={about.team.photos} className="edt-photos--natural" />
-      </div>
+      <section className="edt-container edt-team-split edt-team-hero" aria-labelledby="team-title">
+        <h2 id="team-title" className="edt-team-hero__title">
+          {about.team.lead}
+        </h2>
+        <span className="edt-team-hero__rule" aria-hidden="true" />
+        <p className="edt-team-hero__body">{about.team.body}</p>
+        <figure className="edt-team-hero__photo">
+          <img
+            src={about.team.cutout}
+            alt="The Edutou team standing together"
+            width="1407"
+            height="698"
+            decoding="async"
+          />
+        </figure>
+      </section>
     </>
   );
 }

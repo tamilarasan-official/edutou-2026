@@ -105,6 +105,7 @@ export const about = {
     lead: 'A team that builds alongside its learners.',
     body: 'The Edutou team designs the programmes, runs the campus sessions and supports learners from their first class to their final demo.',
     photos: ['/team/edutou-team.jpg'], // wide group photo, shown full width
+    cutout: '/team/edutou-team-cutout.webp', // same photo, background removed
     // TODO: add team member names, roles and photos.
   },
   mentors: {
