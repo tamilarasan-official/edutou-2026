@@ -3,7 +3,13 @@ import ShinyText from '../fx/ShinyText.jsx';
 import { ArrowUpRight } from '../layout/icons.jsx';
 import { galleryPhotos } from '../../data/site.js';
 
-const photoSrc = (k) => `${import.meta.env.BASE_URL}images/gallery-${k}.jpg`;
+// Gallery keys ('05') map to public/images; paths starting with '/' are used as-is.
+// Photos outside the campus gallery, keyed by their public path.
+const extraPhotos = {
+  '/team/edutou-team.jpg': { w: 1600, h: 900, alt: 'The Edutou team together at the Edutou campus' },
+};
+
+const photoSrc =(k) => (k.startsWith('/') ? k : `${import.meta.env.BASE_URL}images/gallery-${k}.jpg`);
 
 /** "Home / About Us / Our Team" trail. `crumbs` = [{ label, to? }] (last one is the current page). */
 export function Breadcrumbs({ crumbs }) {
@@ -107,7 +113,7 @@ export function Photos({ keys, className = '' }) {
   return (
     <div className={`edt-photos edt-photos--${keys.length} ${className}`.trim()}>
       {keys.map((k) => {
-        const p = galleryPhotos.find((g) => g.k === k);
+        const p = galleryPhotos.find((g) => g.k === k) ?? extraPhotos[k];
         return (
           <figure key={k} className="edt-photo">
             <img src={photoSrc(k)} alt={p?.alt ?? ''} width={p?.w} height={p?.h} loading="lazy" decoding="async" />

@@ -96,11 +96,15 @@ export const about = {
         },
       ],
     ],
+    closing: {
+      text: "Because the next generation doesn't just need graduates. It needs creators, engineers, innovators, and problem solvers.",
+      highlight: 'And that is why Edutou exists.',
+    },
   },
   team: {
     lead: 'A team that builds alongside its learners.',
     body: 'The Edutou team designs the programmes, runs the campus sessions and supports learners from their first class to their final demo.',
-    photos: ['21', '04'],
+    photos: ['/team/edutou-team.jpg', '04'],
     // TODO: add team member names, roles and photos.
   },
   mentors: {

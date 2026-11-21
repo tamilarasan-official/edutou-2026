@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { CtaBand, PageHero, Photos, SectionHead, SiblingNav } from '../components/page/PageParts.jsx';
 import { aboutLinks, mailto, sections } from '../data/navigation.js';
 import { about, values } from '../data/pages.js';
@@ -69,7 +69,40 @@ function FounderProfile() {
           </div>
         ))}
       </div>
+      {f.closing && (
+        <p className="edt-founder__closing">
+          {f.closing.text} <span className="edt-founder__grad">{f.closing.highlight}</span>
+        </p>
+      )}
     </article>
+  );
+}
+
+function Ceo() {
+  return (
+    <div className="edt-container">
+      <FounderProfile />
+    </div>
+  );
+}
+
+/** Small card on Our Team linking to the CEO page. */
+function CeoTeaser() {
+  const f = about.founder;
+  return (
+    <Link to="/about/ceo" className="edt-card edt-ceo-teaser">
+      <img src={f.photo} alt="" width="453" height="507" loading="lazy" decoding="async" />
+      <span className="edt-ceo-teaser__body">
+        <span className="edt-founder__role">{f.role}</span>
+        <span className="edt-ceo-teaser__name">{f.name}</span>
+        <span className="edt-ceo-teaser__tag">
+          {f.tagline} <span className="edt-founder__grad">{f.highlight}</span>
+        </span>
+        <span className="edt-hub__more">
+          Read her story <span aria-hidden="true">→</span>
+        </span>
+      </span>
+    </Link>
   );
 }
 
@@ -77,7 +110,7 @@ function Team() {
   return (
     <>
       <div className="edt-container">
-        <FounderProfile />
+        <CeoTeaser />
       </div>
       <div className="edt-container edt-split edt-team-split">
         <div className="edt-split__text">
@@ -116,12 +149,13 @@ function Partners() {
   );
 }
 
-const CONTENT = { 'our-story': Story, 'our-team': Team, mentors: Mentors, partners: Partners };
+const CONTENT = { 'our-story': Story, ceo: Ceo, 'our-team': Team, mentors: Mentors, partners: Partners };
 
 /** /about/:topic: Our Story, Our Team, Mentors & Experts, Our Partners. */
 export default function AboutTopicPage() {
-  const { topic } = useParams();
-  const index = aboutLinks.findIndex((a) => a.id === topic);
+  const { topic = '' } = useParams();
+  // Case-insensitive, so /about/CEO and /about/ceo both work.
+  const index = aboutLinks.findIndex((a) => a.id === topic.toLowerCase());
   const item = aboutLinks[index];
   usePageTitle(item ? item.title : 'Page not found');
   if (!item) return <NotFoundPage />;

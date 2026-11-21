@@ -38,6 +38,7 @@ export const careerLinks = [
 
 export const aboutLinks = [
   { id: 'our-story', title: 'Our Story', desc: 'Why Edutou exists' },
+  { id: 'ceo', title: 'Our CEO', desc: 'Dr. Annie Grace Vimala, Co-Founder & CEO' },
   { id: 'our-team', title: 'Our Team', desc: 'The people behind Edutou' },
   { id: 'mentors', title: 'Mentors & Experts', desc: 'Practitioners who teach and guide' },
   { id: 'partners', title: 'Our Partners', desc: 'Institutions we work with' },

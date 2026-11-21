@@ -5,6 +5,7 @@ import usePageTitle from './usePageTitle.js';
 
 const PHOTOS = {
   'our-story': about.story.photo,
+  ceo: about.founder.photo,
   'our-team': about.team.photos[0],
   mentors: about.mentors.photos[0],
   partners: about.partners.photo,
