@@ -3,6 +3,7 @@ import Layout from './components/layout/Layout.jsx';
 import HomePage from './pages/HomePage.jsx';
 import ProgrammesPage from './pages/ProgrammesPage.jsx';
 import ProgrammeFormatPage from './pages/ProgrammeFormatPage.jsx';
+import InternshipPage from './pages/InternshipPage.jsx';
 import CareerPage from './pages/CareerPage.jsx';
 import CareerTopicPage from './pages/CareerTopicPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
@@ -18,6 +19,7 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="programmes" element={<ProgrammesPage />} />
         <Route path="programmes/:format" element={<ProgrammeFormatPage />} />
+        <Route path="programmes/:format/:programme" element={<InternshipPage />} />
         <Route path="career" element={<CareerPage />} />
         <Route path="career/:topic" element={<CareerTopicPage />} />
         <Route path="about" element={<AboutPage />} />

@@ -12,6 +12,8 @@ import './styles/enhancements.css';
 import './styles/responsive.css';
 import './styles/layout.css';
 import './styles/pages.css';
+import './styles/internship.css';
+import './styles/theme.css';
 
 // Framer's stylesheet targets #main, so the app mounts there.
 createRoot(document.getElementById('main')).render(

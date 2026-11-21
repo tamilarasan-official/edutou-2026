@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Logo from './Logo.jsx';
+import ThemeToggle from './ThemeToggle.jsx';
 import { Mail } from './icons.jsx';
 import { CONTACT_EMAIL } from '../../data/site.js';
 import { aboutLinks, careerLinks, programmeFormats, utilityNav } from '../../data/navigation.js';
@@ -46,6 +47,7 @@ export default function SiteFooter() {
       <div className="edt-footer__bottom">
         <div className="edt-footer__inner edt-footer__inner--bottom">
           <p>© 2026 Edutou. All rights reserved.</p>
+          <ThemeToggle />
           <nav aria-label="Utility">
             <ul className="edt-footer__utility">
               {utilityNav.map((l) => (

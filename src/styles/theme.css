@@ -1,0 +1,157 @@
+/*
+ * Light theme. Dark is the default (see :root in layout.css); this file only
+ * swaps colour variables when <html data-theme="light"> is set by the footer
+ * switch (ThemeToggle.jsx) or the inline script in index.html.
+ */
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --edt-bg: #f7f4f1;
+  --edt-bg-rgb: 247, 244, 241;
+  --edt-ink: 23, 23, 23;
+  --edt-surface: #ffffff;
+  --edt-surface-warm: #ffe9dc;
+  --edt-border: rgba(204, 61, 0, 0.22);
+  --edt-line: rgba(23, 23, 23, 0.1);
+  --edt-muted: rgba(23, 23, 23, 0.68);
+  --edt-faint: rgba(23, 23, 23, 0.52);
+  --edt-text: rgb(23, 23, 23);
+  --edt-accent-soft: #c2410c;
+  --edt-accent-text: #c2410c;
+}
+:root:not([data-theme='light']) {
+  color-scheme: dark;
+}
+
+/* Framer design tokens used by the homepage sections. */
+:root[data-theme='light'] body {
+  background: var(--edt-bg);
+  --token-de954fd2-a975-4916-8b85-2e5f2acf6b9e: #171717; /* main text (white in dark) */
+  --token-8e5d2111-03fd-4926-9cea-98bf1e41078f: #f7f4f1; /* page background */
+  --token-b9018599-27d5-4611-a33e-8b2f64661ff4: #ffffff; /* card background */
+  --token-18d2a01a-9676-41c1-bf6d-4772415cc68b: #ffe9dc; /* warm card tint */
+  --token-f799a2df-306e-498f-bee9-a5591c59bc52: rgba(204, 61, 0, 0.22); /* card border */
+  --token-faa915f5-e04b-4515-a52f-9a2bba33b6ba: rgba(23, 23, 23, 0.82);
+  --token-2f086888-2254-42af-8805-28fc6ecd4e26: rgba(23, 23, 23, 0.5);
+  --token-a389eb76-d675-4e61-8c10-0746feafc510: rgba(23, 23, 23, 0.12);
+  --token-e6cc12f6-2333-405c-a82f-b6c94880d746: rgba(23, 23, 23, 0.05);
+  --token-a72e40d5-b29d-41f2-bb9d-24392d1b3008: rgba(247, 244, 241, 0.75);
+}
+
+/* ---- Footer theme switch ---- */
+.edt-theme {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--edt-line);
+  border-radius: 999px;
+  background: rgba(var(--edt-ink), 0.04);
+}
+.edt-theme__opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--edt-muted);
+  font: 500 13px/1 var(--edt-font);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.edt-theme__opt:hover {
+  color: var(--edt-text);
+}
+.edt-theme__opt.is-active {
+  background: var(--edt-accent);
+  color: #fff;
+}
+.edt-theme__opt:focus-visible {
+  outline: 2px solid var(--edt-accent);
+  outline-offset: 2px;
+}
+
+/* ---- Light-theme fixes for pieces built on dark artwork ---- */
+
+/* Header: always a frosted light bar, so links stay readable over any section.
+   (Applied to the two bars, not .edt-nav: a backdrop-filter there would trap the
+   fixed-position mobile menu inside the header.) */
+:root[data-theme='light'] .edt-nav__utility,
+:root[data-theme='light'] .edt-nav .edt-nav__bar {
+  background: rgba(var(--edt-bg-rgb), 0.96);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+:root[data-theme='light'] .edt-nav.is-scrolled .edt-nav__bar,
+:root[data-theme='light'] .edt-nav.has-panel .edt-nav__bar,
+:root[data-theme='light'] .edt-nav.is-mobile-open .edt-nav__bar {
+  box-shadow: 0 10px 30px rgba(23, 23, 23, 0.06);
+}
+:root[data-theme='light'] .edt-mnav {
+  background: rgba(var(--edt-bg-rgb), 0.98);
+}
+
+/* The "edutou" wordmark image is white; render it near-black on light. */
+:root[data-theme='light'] .edt-logo__word {
+  filter: brightness(0);
+  opacity: 0.88;
+}
+
+/* Hero artwork is dark in both themes, so the hero stays a dark band. */
+:root[data-theme='light'] #hero {
+  background: #171717;
+}
+/* Dark islands: sections built on dark artwork keep the dark palette in light mode.
+   --edt-text etc. are resolved at :root, so they must be re-declared here too. */
+:root[data-theme='light'] #hero,
+:root[data-theme='light'] .edt-founder {
+  color-scheme: dark;
+  --edt-ink: 255, 255, 255;
+  --edt-bg-rgb: 23, 23, 23;
+  --edt-text: #fff;
+  --edt-muted: rgba(255, 255, 255, 0.62);
+  --edt-faint: rgba(255, 255, 255, 0.45);
+  --edt-line: rgba(255, 255, 255, 0.08);
+  --edt-surface: rgb(28, 28, 28);
+  --edt-surface-warm: rgb(62, 32, 19);
+  --edt-border: rgba(112, 69, 54, 0.7);
+  --edt-accent-soft: #ffb48a;
+  --edt-accent-text: #ff8a4c;
+  --token-de954fd2-a975-4916-8b85-2e5f2acf6b9e: #fff;
+  --token-8e5d2111-03fd-4926-9cea-98bf1e41078f: #171717;
+  --token-b9018599-27d5-4611-a33e-8b2f64661ff4: #1c1c1c;
+  --token-18d2a01a-9676-41c1-bf6d-4772415cc68b: #3e2013;
+  --token-f799a2df-306e-498f-bee9-a5591c59bc52: #704536b3;
+  --token-faa915f5-e04b-4515-a52f-9a2bba33b6ba: #ffffffd9;
+  --token-2f086888-2254-42af-8805-28fc6ecd4e26: #ffffff61;
+  --token-a389eb76-d675-4e61-8c10-0746feafc510: #8a8a8a4d;
+  --token-e6cc12f6-2333-405c-a82f-b6c94880d746: #2e2e2e66;
+  --token-a72e40d5-b29d-41f2-bb9d-24392d1b3008: #171717b3;
+}
+
+/* Orange buttons keep white text in both themes ('.edt-app a' would otherwise
+   make links inherit the page text colour). */
+.edt-app a.edt-btn--primary,
+.edt-app button.edt-btn--primary {
+  color: #fff;
+}
+
+/* Shimmer on the small orange page labels: a near-white sweep vanishes on light. */
+:root[data-theme='light'] .edt-eyebrow .edt-shiny {
+  --edt-shine-base: rgb(214, 70, 0);
+  --edt-shine-hi: rgb(140, 35, 0);
+}
+:root[data-theme='light'] .edt-shiny {
+  --edt-shine-hi: rgb(255, 94, 0);
+}
+
+/* Desktop dropdown menus */
+:root[data-theme='light'] .edt-mega,
+:root[data-theme='light'] .edt-drop {
+  background: var(--edt-surface);
+  box-shadow:
+    0 24px 60px rgba(23, 23, 23, 0.14),
+    0 0 0 1px rgba(23, 23, 23, 0.04);
+}

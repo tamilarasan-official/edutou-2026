@@ -1,9 +1,16 @@
 import { useEffect, useMemo, useRef } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { SectionHead } from './PageParts.jsx';
 import { ArrowUpRight } from '../layout/icons.jsx';
 import { domains, mailto, programmeFormats } from '../../data/navigation.js';
 import { programmes } from '../../data/programmes.js';
+import { internshipPath, internships } from '../../data/internships.js';
+
+// Programmes with a full page of their own (currently the Industry Internship tracks).
+const pageFor = (p) => {
+  const t = internships.find((x) => x.programmeId === p.id);
+  return t ? internshipPath(t.slug) : null;
+};
 
 export const formatTitle = (id) => programmeFormats.find((f) => f.id === id)?.title ?? id;
 export const inFormat = (p, formatId) => p.format === formatId || (p.alsoIn ?? []).includes(formatId);
@@ -55,9 +62,16 @@ export function ProgrammeCard({ p }) {
           {p.details.note && <p className="edt-prog__note">{p.details.note}</p>}
         </details>
       )}
-      <a className="edt-btn edt-btn--primary edt-prog__cta" href={mailto(`Enquiry: ${p.title}`)}>
-        Enquire / Enrol <ArrowUpRight />
-      </a>
+      <div className="edt-prog__actions">
+        <a className="edt-btn edt-btn--primary edt-prog__cta" href={mailto(`Enquiry: ${p.title}`)}>
+          Enquire / Enrol <ArrowUpRight />
+        </a>
+        {pageFor(p) && (
+          <Link className="edt-btn edt-btn--ghost edt-prog__cta" to={pageFor(p)}>
+            View full programme <span aria-hidden="true">→</span>
+          </Link>
+        )}
+      </div>
     </article>
   );
 }
