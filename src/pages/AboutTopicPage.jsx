@@ -30,15 +30,63 @@ function Story() {
   );
 }
 
+function FounderProfile() {
+  const f = about.founder;
+  return (
+    <article className="edt-founder" aria-labelledby="founder-name">
+      <div className="edt-founder__top">
+        <figure className="edt-founder__photo">
+          <img src={f.photo} alt={f.name} width="453" height="507" decoding="async" />
+        </figure>
+        <div className="edt-founder__head">
+          <p className="edt-founder__role">{f.role}</p>
+          <h2 id="founder-name" className="edt-founder__name">
+            {f.name}
+          </h2>
+          <p className="edt-founder__tagline">
+            {f.tagline}{' '}
+            <br className="edt-founder__br" />
+            <span className="edt-founder__grad">{f.highlight}</span>
+          </p>
+          <dl className="edt-founder__stats">
+            {f.stats.map((s) => (
+              <div key={s.value} className="edt-founder__stat">
+                <dt>{s.value}</dt>
+                <dd>{s.label}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+      <div className="edt-founder__story">
+        {f.columns.map((col, i) => (
+          <div key={i} className="edt-founder__col">
+            {col.map((p) => (
+              <p key={p.text} className={p.kind ? `edt-founder__${p.kind}` : undefined}>
+                {p.text}
+              </p>
+            ))}
+          </div>
+        ))}
+      </div>
+    </article>
+  );
+}
+
 function Team() {
   return (
-    <div className="edt-container edt-split">
-      <div className="edt-split__text">
-        <SectionHead title={about.team.lead} />
-        <p className="edt-body">{about.team.body}</p>
+    <>
+      <div className="edt-container">
+        <FounderProfile />
       </div>
-      <Photos keys={about.team.photos} />
-    </div>
+      <div className="edt-container edt-split edt-team-split">
+        <div className="edt-split__text">
+          <SectionHead title={about.team.lead} />
+          <p className="edt-body">{about.team.body}</p>
+        </div>
+        <Photos keys={about.team.photos} />
+      </div>
+    </>
   );
 }
 

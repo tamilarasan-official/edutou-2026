@@ -752,3 +752,161 @@
     font-size: 17px;
   }
 }
+
+/* ---------- Founder / CEO profile (About › Our Team) ---------- */
+.edt-founder {
+  position: relative;
+  overflow: hidden;
+  padding: 26px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background:
+    radial-gradient(60% 45% at 100% 0%, rgba(214, 72, 18, 0.55), transparent 70%),
+    radial-gradient(45% 35% at 0% 100%, rgba(150, 50, 15, 0.45), transparent 70%),
+    #0b0b0c;
+  color: #fff;
+}
+.edt-founder__top {
+  display: grid;
+  grid-template-columns: minmax(0, 454fr) minmax(0, 732fr);
+  gap: 44px;
+  align-items: start;
+}
+.edt-founder__photo {
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 453 / 507;
+}
+.edt-founder__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.edt-founder__head {
+  padding-top: 26px;
+  min-width: 0;
+}
+.edt-founder__role {
+  margin: 0 0 14px;
+  color: #ff8a4c;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.edt-founder__name {
+  margin: 0 0 22px;
+  font-size: 45px;
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.edt-founder__tagline {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.edt-founder__grad {
+  background: linear-gradient(90deg, #ff3b2f 0%, #ff6a1a 55%, #ffa11c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.edt-founder__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 30px 0 0;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.edt-founder__stat {
+  padding: 0 20px;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+.edt-founder__stat:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+.edt-founder__stat dt {
+  font-family: 'Oswald', 'Inter', sans-serif;
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #ff4a2a;
+  white-space: nowrap;
+}
+.edt-founder__stat dd {
+  margin: 8px 0 0;
+  font-size: 17px;
+  line-height: 1.45;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.66);
+}
+.edt-founder__story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 44px;
+  margin-top: 46px;
+}
+.edt-founder__col p {
+  margin: 0 0 15px;
+  font-size: 18.5px;
+  line-height: 1.72;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.78);
+}
+.edt-founder__col p:last-child {
+  margin-bottom: 0;
+}
+.edt-founder__col .edt-founder__question {
+  font-size: 19.5px;
+  line-height: 1.55;
+  font-weight: 700;
+  color: #ff8a4c;
+}
+.edt-founder__col .edt-founder__vision {
+  font-weight: 700;
+  color: #fff;
+}
+.edt-team-split {
+  margin-top: 96px;
+}
+
+@media (max-width: 1199.98px) {
+  .edt-founder__name { font-size: 38px; }
+  .edt-founder__tagline { font-size: 27px; }
+  .edt-founder__role { font-size: 13px; }
+  .edt-founder__stat dt { font-size: 34px; }
+  .edt-founder__stat dd { font-size: 15px; }
+  .edt-founder__col p { font-size: 17px; }
+  .edt-founder__col .edt-founder__question { font-size: 18px; }
+  .edt-founder__top, .edt-founder__story { gap: 36px; }
+  .edt-founder__head { padding-top: 10px; }
+}
+@media (max-width: 899.98px) {
+  .edt-founder { padding: 20px; border-radius: 22px; }
+  .edt-founder__top, .edt-founder__story { grid-template-columns: 1fr; gap: 28px; }
+  .edt-founder__photo { max-width: 460px; border-radius: 18px; }
+  .edt-founder__head { padding-top: 0; }
+  .edt-founder__story { gap: 18px; margin-top: 36px; }
+  .edt-team-split { margin-top: 64px; }
+}
+@media (max-width: 519.98px) {
+  .edt-founder { padding: 16px; }
+  .edt-founder__role { font-size: 12px; letter-spacing: 0.12em; }
+  .edt-founder__name { font-size: 32px; margin-bottom: 14px; }
+  .edt-founder__tagline { font-size: 23px; }
+  .edt-founder__br { display: none; }
+  .edt-founder__stats { grid-template-columns: 1fr; margin-top: 24px; padding-top: 6px; }
+  .edt-founder__stat { padding: 16px 0; border-left: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+  .edt-founder__stat:last-child { border-bottom: 0; }
+  .edt-founder__stat dt { font-size: 34px; }
+  .edt-founder__stat dd { margin-top: 4px; font-size: 15px; }
+  .edt-founder__col p { font-size: 16px; line-height: 1.65; }
+  .edt-founder__col .edt-founder__question { font-size: 17px; }
+}
