@@ -112,12 +112,12 @@ function Team() {
       <div className="edt-container">
         <CeoTeaser />
       </div>
-      <div className="edt-container edt-split edt-team-split">
-        <div className="edt-split__text">
+      <div className="edt-container edt-team-split">
+        <div className="edt-team-intro">
           <SectionHead title={about.team.lead} />
           <p className="edt-body">{about.team.body}</p>
         </div>
-        <Photos keys={about.team.photos} />
+        <Photos keys={about.team.photos} className="edt-photos--natural" />
       </div>
     </>
   );
