@@ -5,6 +5,8 @@ import VerifyForm from "./VerifyForm";
 
 const EMAIL = "sujan@welocalhost.com";
 const CONTACT = `mailto:${EMAIL}`;
+/** Registration landing page; every "apply" call to action goes here. */
+const APPLY_URL = "https://learn.edutou.in";
 
 const links = [
   { href: "#hero", label: "Home" },
@@ -183,12 +185,12 @@ export default function Home() {
               {links.map((l) => <li key={l.href}><a href={l.href}>{l.label}</a></li>)}
             </ul>
           </nav>
-          <a className="btn btn--small nav__cta" href="#contact">Get Started</a>
+          <a className="btn btn--small nav__cta" href={APPLY_URL}>Apply Now</a>
           <details className="nav__menu">
             <summary aria-label="Open menu"><span /><span /></summary>
             <ul>
               {links.map((l) => <li key={l.href}><a href={l.href}>{l.label}</a></li>)}
-              <li><a className="btn" href="#contact">Get Started</a></li>
+              <li><a className="btn" href={APPLY_URL}>Apply Now</a></li>
             </ul>
           </details>
         </div>
@@ -210,7 +212,7 @@ export default function Home() {
               technology, personalised learning and real-world projects to help learners thrive in the digital economy.
             </p>
             <div className="hero__actions reveal">
-              <a className="btn" href="#contact">Start Your Journey <Icon name="arrow" size={18} /></a>
+              <a className="btn" href={APPLY_URL}>Start Your Journey <Icon name="arrow" size={18} /></a>
               <a className="btn btn--ghost" href="#programs">Browse Programs</a>
             </div>
             <div className="trust reveal">
@@ -397,7 +399,7 @@ export default function Home() {
               <h2 id="cta-h">Do it once. Do it right.</h2>
               <p>Harness the power of AI to grow your skills with confidence and clarity. Tell us about your campus or your goals, and the team will reply.</p>
               <div className="hero__actions">
-                <a className="btn btn--light" href={CONTACT}>Get Started <Icon name="arrow" size={18} /></a>
+                <a className="btn btn--light" href={APPLY_URL}>Apply Now <Icon name="arrow" size={18} /></a>
                 <a className="btn btn--ghost" href={CONTACT}><Icon name="mail" size={18} /> {EMAIL}</a>
               </div>
             </div>
