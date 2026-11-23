@@ -427,3 +427,12 @@
     overflow-x: auto;
   }
 }
+
+/* ---- Hero: hide the horizontal guide line ----
+ * The Framer hero draws a 1px full-width line ("Line", .framer-lmj2bl) at the
+ * height of the navbar, which ran straight through the logo. Hidden in all
+ * three breakpoint variants (desktop, tablet, phone).
+ */
+.framer-lmj2bl {
+  display: none !important;
+}

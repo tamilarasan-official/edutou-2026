@@ -4,33 +4,13 @@ import { CONTACT_EMAIL } from './site.js';
 /** mailto link with a pre-filled subject */
 export const mailto = (subject) => `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}`;
 
-export const ENROL_HREF = mailto('Enrolment enquiry');
+/** Enrol page; pass ?programme=<slug> to pre-select a programme. */
+export const ENROL_HREF = '/enroll';
 
-// Programmes → explore by learning format
-export const programmeFormats = [
-  { id: 'courses', no: '01', title: 'Courses', desc: 'Structured, domain-specific learning programmes' },
-  { id: 'workshops', no: '02', title: 'Workshops', desc: 'Short-duration, practical learning experiences' },
-  { id: 'bootcamps', no: '03', title: 'Bootcamps', desc: 'Intensive, hands-on skill development' },
-  { id: 'masterclasses', no: '04', title: 'Masterclasses', desc: 'Expert-led advanced learning sessions' },
-  {
-    id: 'internship-programmes',
-    no: '05',
-    title: 'Internship Programmes',
-    desc: 'Industry exposure and practical experience',
-  },
-  {
-    id: 'specialised-programmes',
-    no: '06',
-    title: 'Specialised Programmes',
-    desc: 'Customised and interdisciplinary learning',
-  },
-];
-
-// Technology domains are filters inside the catalogue, not navbar items.
-export const domains = ['AI', 'CSE', 'ECE', 'EEE', 'Robotics', 'Drone', 'AMR', 'VLSI', 'PCB'];
+// Programme categories ("learning formats") and domain filters are managed in
+// the CMS (admin.edutou.in); see data/cms.js and useSite().
 
 export const careerLinks = [
-  { id: 'internships', title: 'Internships', desc: 'Apply your skills in real roles' },
   { id: 'live-projects', title: 'Live Projects', desc: 'Build real products with mentor guidance' },
   { id: 'industry-exposure', title: 'Industry Exposure', desc: 'See how technology teams really work' },
   { id: 'career-development', title: 'Career Development', desc: 'Get ready for interviews and your first role' },
@@ -45,13 +25,11 @@ export const aboutLinks = [
 ];
 
 // Every category item has its own page: /programmes/<id>, /career/<id>, /about/<id>
-programmeFormats.forEach((f) => (f.path = `/programmes/${f.id}`));
 careerLinks.forEach((c) => (c.path = `/career/${c.id}`));
 aboutLinks.forEach((a) => (a.path = `/about/${a.id}`));
 
 /** Section metadata, used for breadcrumbs and "more in this section" links. */
 export const sections = {
-  programmes: { label: 'Programmes', path: '/programmes', items: programmeFormats },
   career: { label: 'Career', path: '/career', items: careerLinks },
   about: { label: 'About Us', path: '/about', items: aboutLinks },
 };

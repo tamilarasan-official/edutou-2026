@@ -2,27 +2,36 @@ import { useEffect, useMemo, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { SectionHead } from './PageParts.jsx';
 import { ArrowUpRight } from '../layout/icons.jsx';
-import { domains, mailto, programmeFormats } from '../../data/navigation.js';
-import { programmes } from '../../data/programmes.js';
-import { internshipPath, internships } from '../../data/internships.js';
+import { categoryTitle, inCategory, priceLabel, retrySite, scheduleLabel, useSite } from '../../data/cms.js';
 
-// Programmes with a full page of their own (currently the Industry Internship tracks).
-const pageFor = (p) => {
-  const t = internships.find((x) => x.programmeId === p.id);
-  return t ? internshipPath(t.slug) : null;
-};
-
-export const formatTitle = (id) => programmeFormats.find((f) => f.id === id)?.title ?? id;
-export const inFormat = (p, formatId) => p.format === formatId || (p.alsoIn ?? []).includes(formatId);
-export const programmeCount = (formatId) => programmes.filter((p) => inFormat(p, formatId)).length;
+/** Type + price badges (e.g. "Webinar", "Free" / "₹4,999"). */
+export function ProgrammeBadges({ p, className = '' }) {
+  const price = priceLabel(p.pricing);
+  return (
+    <span className={`edt-prog__badges ${className}`}>
+      {p.type && <span className="edt-badge edt-badge--type">{p.type}</span>}
+      {price && <span className={`edt-badge ${p.pricing.model === 'free' ? 'edt-badge--free' : 'edt-badge--paid'}`}>{price}</span>}
+    </span>
+  );
+}
 
 export function ProgrammeCard({ p }) {
+  const site = useSite();
+  const card = p.card;
+  const when = scheduleLabel(p.schedule);
+  const meta = [when, ...card.meta].filter(Boolean);
   return (
     <article className="edt-card edt-prog">
+      {p.image?.url && (
+        <figure className="edt-prog__image">
+          <img src={p.image.url} alt={p.image.alt || ''} loading="lazy" decoding="async" style={p.image.focus ? { objectPosition: p.image.focus } : undefined} />
+        </figure>
+      )}
       <div className="edt-prog__top">
-        {[p.format, ...(p.alsoIn ?? [])].map((f) => (
+        <ProgrammeBadges p={p} />
+        {[p.category, ...(p.alsoIn ?? [])].map((f) => (
           <span key={f} className="edt-tag edt-tag--accent">
-            {formatTitle(f)}
+            {categoryTitle(site, f)}
           </span>
         ))}
         {p.domains.map((d) => (
@@ -32,47 +41,79 @@ export function ProgrammeCard({ p }) {
         ))}
       </div>
       <h3 className="edt-prog__title">{p.title}</h3>
-      <p className="edt-prog__meta">{p.meta.join(' · ')}</p>
-      <p className="edt-prog__summary">{p.summary}</p>
-      <ul className="edt-prog__list">
-        {p.highlights.map((h) => (
-          <li key={h}>{h}</li>
-        ))}
-      </ul>
-      {p.tools.length > 0 && (
+      {meta.length > 0 && <p className="edt-prog__meta">{meta.join(' · ')}</p>}
+      {card.summary && <p className="edt-prog__summary">{card.summary}</p>}
+      {card.highlights.length > 0 && (
+        <ul className="edt-prog__list">
+          {card.highlights.map((h) => (
+            <li key={h}>{h}</li>
+          ))}
+        </ul>
+      )}
+      {card.tools.length > 0 && (
         <p className="edt-prog__tools">
-          Tools: <span>{p.tools.join(', ')}</span>
+          Tools: <span>{card.tools.join(', ')}</span>
         </p>
       )}
-      {p.details && (
+      {card.details?.enabled && (
         <details className="edt-prog__more">
           <summary>Roles &amp; live projects</summary>
-          <p className="edt-prog__sub">Roles you can grow into</p>
-          <ul className="edt-prog__list">
-            {p.details.roles.map((r) => (
-              <li key={r}>{r}</li>
-            ))}
-          </ul>
-          <p className="edt-prog__sub">Sample live projects</p>
-          <ul className="edt-prog__list">
-            {p.details.projects.map((r) => (
-              <li key={r}>{r}</li>
-            ))}
-          </ul>
-          {p.details.note && <p className="edt-prog__note">{p.details.note}</p>}
+          {card.details.roles.length > 0 && (
+            <>
+              <p className="edt-prog__sub">Roles you can grow into</p>
+              <ul className="edt-prog__list">
+                {card.details.roles.map((r) => (
+                  <li key={r}>{r}</li>
+                ))}
+              </ul>
+            </>
+          )}
+          {card.details.projects.length > 0 && (
+            <>
+              <p className="edt-prog__sub">Sample live projects</p>
+              <ul className="edt-prog__list">
+                {card.details.projects.map((r) => (
+                  <li key={r}>{r}</li>
+                ))}
+              </ul>
+            </>
+          )}
+          {card.details.note && <p className="edt-prog__note">{card.details.note}</p>}
         </details>
       )}
       <div className="edt-prog__actions">
-        <a className="edt-btn edt-btn--primary edt-prog__cta" href={mailto(`Enquiry: ${p.title}`)}>
+        <Link className="edt-btn edt-btn--primary edt-prog__cta" to={p.enrolPath}>
           Enquire / Enrol <ArrowUpRight />
-        </a>
-        {pageFor(p) && (
-          <Link className="edt-btn edt-btn--ghost edt-prog__cta" to={pageFor(p)}>
+        </Link>
+        {p.pagePath && (
+          <Link className="edt-btn edt-btn--ghost edt-prog__cta" to={p.pagePath}>
             View full programme <span aria-hidden="true">→</span>
           </Link>
         )}
       </div>
     </article>
+  );
+}
+
+/** Shown while the catalogue loads, or if the API cannot be reached. */
+export function SiteStatus({ site }) {
+  if (site.status === 'error') {
+    return (
+      <div className="edt-card edt-empty">
+        <h3>Programmes could not be loaded</h3>
+        <p>Please check your connection and try again.</p>
+        <button type="button" className="edt-btn edt-btn--primary" onClick={retrySite}>
+          Try again
+        </button>
+      </div>
+    );
+  }
+  return (
+    <div className="edt-progs" aria-busy="true" aria-label="Loading programmes">
+      {[0, 1].map((i) => (
+        <div key={i} className="edt-card edt-prog edt-prog--skeleton" />
+      ))}
+    </div>
   );
 }
 
@@ -110,19 +151,21 @@ function FilterRow({ label, value, options, onChange, allLabel }) {
  * (?domain=AI&format=bootcamps). Pass `fixedFormat` on a format's own page.
  */
 export default function Catalogue({ fixedFormat, title = 'Programme catalogue', lead }) {
+  const site = useSite();
+  const { categories, domains, programmes } = site;
   const [params, setParams] = useSearchParams();
-  const format =
-    fixedFormat ?? (programmeFormats.some((f) => f.id === params.get('format')) ? params.get('format') : 'all');
+  const format = fixedFormat ?? (categories.some((f) => f.id === params.get('format')) ? params.get('format') : 'all');
   const domain = domains.includes(params.get('domain')) ? params.get('domain') : 'all';
+  const formatTitle = (id) => categoryTitle(site, id);
   const ref = useRef(null);
   const lastFilter = useRef(null);
 
   const results = useMemo(
     () =>
       programmes.filter(
-        (p) => (format === 'all' || inFormat(p, format)) && (domain === 'all' || p.domains.includes(domain)),
+        (p) => (format === 'all' || inCategory(p, format)) && (domain === 'all' || p.domains.includes(domain)),
       ),
-    [format, domain],
+    [programmes, format, domain],
   );
 
   // Jump to the list when a filter changes, or when the page opens with a filter
@@ -160,7 +203,7 @@ export default function Catalogue({ fixedFormat, title = 'Programme catalogue', 
               label="Format"
               value={format}
               allLabel="All formats"
-              options={programmeFormats.map((f) => ({ id: f.id, label: f.title }))}
+              options={categories.map((f) => ({ id: f.id, label: f.title }))}
               onChange={(v) => setFilter('format', v)}
             />
           )}
@@ -179,7 +222,9 @@ export default function Catalogue({ fixedFormat, title = 'Programme catalogue', 
           {domain !== 'all' && ` · ${domain}`}
         </p>
 
-        {results.length > 0 ? (
+        {site.status !== 'ready' ? (
+          <SiteStatus site={site} />
+        ) : results.length > 0 ? (
           <div className="edt-progs">
             {results.map((p) => (
               <ProgrammeCard key={p.id} p={p} />
@@ -193,14 +238,9 @@ export default function Catalogue({ fixedFormat, title = 'Programme catalogue', 
               {domain !== 'all' ? ` in ${domain}` : ''} are on the way. Tell us what you are looking for and we will get
               back to you.
             </p>
-            <a
-              className="edt-btn edt-btn--primary"
-              href={mailto(
-                `Programme enquiry${format !== 'all' ? `: ${formatTitle(format)}` : ''}${domain !== 'all' ? ` (${domain})` : ''}`,
-              )}
-            >
+            <Link className="edt-btn edt-btn--primary" to="/enroll">
               Ask about upcoming {what} <ArrowUpRight />
-            </a>
+            </Link>
           </div>
         )}
       </div>

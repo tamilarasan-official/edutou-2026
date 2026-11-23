@@ -4,6 +4,9 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
+# API origin for programmes and enrolments, inlined at build time.
+ARG VITE_API_URL=https://api.edutou.in
+ENV VITE_API_URL=$VITE_API_URL
 RUN npm run build
 
 # ---- serve ----

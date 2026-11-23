@@ -2,22 +2,24 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo.jsx';
 import { ArrowUpRight, Chevron } from './icons.jsx';
-import { ENROL_HREF, aboutLinks, careerLinks, domains, mainNav, programmeFormats } from '../../data/navigation.js';
+import { ENROL_HREF, aboutLinks, careerLinks, mainNav } from '../../data/navigation.js';
+import { useSite } from '../../data/cms.js';
 
 const CLOSE_DELAY = 140;
 
 function ProgrammesPanel({ onNavigate }) {
+  const { categories, domains } = useSite();
   return (
     <div className="edt-mega">
       <div className="edt-mega__main">
         <p className="edt-mega__label">Explore by learning format</p>
         <div className="edt-mega__grid">
-          {programmeFormats.map((f) => (
+          {categories.map((f) => (
             <Link key={f.id} to={f.path} className="edt-mega__item" onClick={onNavigate}>
               <span className="edt-mega__no">{f.no}</span>
               <span>
                 <strong>{f.title}</strong>
-                <small>{f.desc}</small>
+                <small>{f.description}</small>
               </span>
             </Link>
           ))}
@@ -62,17 +64,18 @@ const PANELS = {
   about: (close) => <ListPanel base="/about" items={aboutLinks} allLabel="About Edutou" onNavigate={close} />,
 };
 
-const MOBILE_GROUPS = {
-  programmes: [
-    ...programmeFormats.map((f) => ({ label: f.title, to: f.path })),
-    { label: 'All programmes', to: '/programmes' },
-  ],
-  career: [...careerLinks.map((c) => ({ label: c.title, to: c.path })), { label: 'Career overview', to: '/career' }],
-  about: [...aboutLinks.map((a) => ({ label: a.title, to: a.path })), { label: 'About Edutou', to: '/about' }],
-};
+function useMobileGroups() {
+  const { categories } = useSite();
+  return {
+    programmes: [...categories.map((f) => ({ label: f.title, to: f.path })), { label: 'All programmes', to: '/programmes' }],
+    career: [...careerLinks.map((c) => ({ label: c.title, to: c.path })), { label: 'Career overview', to: '/career' }],
+    about: [...aboutLinks.map((a) => ({ label: a.title, to: a.path })), { label: 'About Edutou', to: '/about' }],
+  };
+}
 
 /** Site header: utility bar, main navigation with dropdowns, mobile menu. */
 export default function Navbar() {
+  const MOBILE_GROUPS = useMobileGroups();
   const location = useLocation();
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
@@ -221,9 +224,9 @@ export default function Navbar() {
             </ul>
           </nav>
 
-          <a className="edt-btn edt-btn--primary edt-nav__cta" href={ENROL_HREF}>
+          <Link className="edt-btn edt-btn--primary edt-nav__cta" to={ENROL_HREF}>
             Enrol Now <ArrowUpRight />
-          </a>
+          </Link>
 
           <button
             type="button"
@@ -280,9 +283,9 @@ export default function Navbar() {
             )}
           </ul>
           <div className="edt-mnav__footer">
-            <a className="edt-btn edt-btn--primary edt-btn--block" href={ENROL_HREF}>
+            <Link className="edt-btn edt-btn--primary edt-btn--block" to={ENROL_HREF} onClick={closeAll}>
               Enrol Now <ArrowUpRight />
-            </a>
+            </Link>
             <Link to="/verify-certificate" className="edt-mnav__utility" onClick={closeAll}>
               Verify Certificate <ArrowUpRight />
             </Link>

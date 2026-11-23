@@ -3,15 +3,13 @@ import Logo from './Logo.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 import { Mail } from './icons.jsx';
 import { CONTACT_EMAIL } from '../../data/site.js';
-import { aboutLinks, careerLinks, programmeFormats, utilityNav } from '../../data/navigation.js';
+import { aboutLinks, careerLinks, utilityNav } from '../../data/navigation.js';
+import { useSite } from '../../data/cms.js';
 
-const COLUMNS = [
+const columnsFor = (categories) => [
   {
     title: 'Programmes',
-    links: [
-      ...programmeFormats.map((f) => ({ label: f.title, to: f.path })),
-      { label: 'All programmes', to: '/programmes' },
-    ],
+    links: [...categories.map((f) => ({ label: f.title, to: f.path })), { label: 'All programmes', to: '/programmes' }],
   },
   { title: 'Career', links: careerLinks.map((c) => ({ label: c.title, to: c.path })) },
   { title: 'About Us', links: aboutLinks.map((a) => ({ label: a.title, to: a.path })) },
@@ -19,6 +17,7 @@ const COLUMNS = [
 
 /** Site-wide footer. */
 export default function SiteFooter() {
+  const COLUMNS = columnsFor(useSite().categories);
   return (
     <footer className="edt-footer">
       <div className="edt-footer__inner">

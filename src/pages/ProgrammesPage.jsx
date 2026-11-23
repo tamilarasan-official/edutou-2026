@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
 import { CtaBand, PageHero } from '../components/page/PageParts.jsx';
-import Catalogue, { programmeCount } from '../components/page/Catalogue.jsx';
-import { ENROL_HREF, mailto, programmeFormats } from '../data/navigation.js';
+import Catalogue from '../components/page/Catalogue.jsx';
+import { ENROL_HREF, mailto } from '../data/navigation.js';
+import { inCategory, useSite } from '../data/cms.js';
 import usePageTitle from './usePageTitle.js';
 
 /** /programmes: overview of the six learning formats + the full catalogue. */
 export default function ProgrammesPage() {
   usePageTitle('Programmes');
+  const { categories, programmes } = useSite();
+  const programmeCount = (id) => programmes.filter((p) => inCategory(p, id)).length;
   return (
     <>
       <PageHero eyebrow="Programmes" title="Explore by learning format">
@@ -17,13 +20,13 @@ export default function ProgrammesPage() {
       <section className="edt-section">
         <div className="edt-container">
           <div className="edt-formats">
-            {programmeFormats.map((f) => {
+            {categories.map((f) => {
               const n = programmeCount(f.id);
               return (
                 <Link key={f.id} to={f.path} className="edt-card edt-format">
                   <span className="edt-format__no">{f.no}</span>
                   <span className="edt-format__title">{f.title}</span>
-                  <span className="edt-format__desc">{f.desc}</span>
+                  <span className="edt-format__desc">{f.description}</span>
                   <span className="edt-format__foot">
                     <span className="edt-format__count">{n ? `${n} programme${n > 1 ? 's' : ''}` : 'Coming soon'}</span>
                     <span className="edt-format__go">

@@ -1092,3 +1092,272 @@
 @media (max-width: 809.98px) {
   .edt-team-intro { grid-template-columns: 1fr; gap: 12px; margin-bottom: 24px; }
 }
+
+/* ===========================================================================
+ * CMS-driven programmes: badges, card image, loading state
+ * ======================================================================== */
+.edt-prog__badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.edt-prog__badges--center {
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.edt-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+.edt-badge--type {
+  background: var(--edt-accent);
+  color: #fff;
+}
+.edt-badge--free {
+  background: rgba(34, 197, 94, 0.16);
+  color: rgb(74, 222, 128);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+}
+.edt-badge--paid {
+  background: rgba(var(--edt-ink), 0.08);
+  color: var(--edt-text);
+  border: 1px solid var(--edt-line);
+}
+:root[data-theme='light'] .edt-badge--free {
+  color: rgb(21, 128, 61);
+}
+.edt-prog__image {
+  margin: -4px -4px 16px;
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: rgba(var(--edt-ink), 0.05);
+}
+.edt-prog__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.edt-prog--skeleton {
+  min-height: 320px;
+  background: linear-gradient(100deg, rgba(var(--edt-ink), 0.03) 30%, rgba(var(--edt-ink), 0.08) 50%, rgba(var(--edt-ink), 0.03) 70%);
+  background-size: 200% 100%;
+  animation: edt-skeleton 1.4s ease-in-out infinite;
+}
+@keyframes edt-skeleton {
+  to {
+    background-position: -200% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .edt-prog--skeleton {
+    animation: none;
+  }
+}
+.edt-split--single {
+  grid-template-columns: 1fr;
+}
+
+/* ===========================================================================
+ * Enrol page (/enroll)
+ * ======================================================================== */
+.edt-enrol__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .edt-enrol__grid {
+    grid-template-columns: 1fr;
+  }
+  .edt-enrol__summary {
+    order: -1;
+  }
+}
+.edt-enrol__form {
+  display: grid;
+  gap: 18px;
+  padding: 28px;
+}
+.edt-enrol__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 560px) {
+  .edt-enrol__row {
+    grid-template-columns: 1fr;
+  }
+  .edt-enrol__form {
+    padding: 20px;
+  }
+}
+.edt-field {
+  display: grid;
+  gap: 6px;
+}
+.edt-field__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--edt-text);
+}
+.edt-field__error {
+  margin: 0;
+  font-size: 13px;
+  color: #ff6b6b;
+}
+.edt-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--edt-line);
+  background: rgba(var(--edt-ink), 0.04);
+  color: var(--edt-text);
+  font: inherit;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+select.edt-input {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--edt-muted) 50%),
+    linear-gradient(135deg, var(--edt-muted) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 21px, calc(100% - 15px) 21px;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 40px;
+}
+select.edt-input option {
+  background: var(--edt-bg);
+  color: var(--edt-text);
+}
+.edt-input:focus,
+.edt-input:focus-within {
+  border-color: var(--edt-accent);
+  box-shadow: 0 0 0 3px rgba(255, 94, 0, 0.2);
+}
+.edt-field.has-error .edt-input {
+  border-color: #ff6b6b;
+}
+.edt-input--prefixed {
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+}
+.edt-input__prefix {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-right: 1px solid var(--edt-line);
+  color: var(--edt-muted);
+  white-space: nowrap;
+}
+.edt-input--prefixed input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  padding: 12px 14px;
+  outline: none;
+}
+.edt-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.edt-enrol__privacy {
+  margin: -6px 0 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--edt-faint);
+}
+.edt-enrol__summary {
+  padding: 24px;
+  display: grid;
+  gap: 10px;
+  position: sticky;
+  top: calc(var(--edt-nav-h) + 24px);
+}
+.edt-enrol__img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.edt-enrol__cat {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--edt-accent-text);
+  font-weight: 600;
+}
+.edt-enrol__title {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.25;
+}
+.edt-enrol__meta {
+  margin: 0;
+  font-size: 14px;
+  color: var(--edt-accent-soft);
+}
+.edt-enrol__text {
+  margin: 4px 0 0;
+  color: var(--edt-muted);
+  line-height: 1.6;
+}
+.edt-enrol__more {
+  margin-top: 6px;
+  font-weight: 600;
+  color: var(--edt-accent-text);
+}
+.edt-enrol__done {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 40px 28px;
+  text-align: center;
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+.edt-enrol__done h2 {
+  margin: 0;
+}
+.edt-enrol__done p {
+  margin: 0;
+  color: var(--edt-muted);
+}
+.edt-enrol__for {
+  font-weight: 600;
+  color: var(--edt-accent-soft) !important;
+}
+.edt-enrol__tick {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.18);
+  color: rgb(74, 222, 128);
+  font-size: 28px;
+}
+.edt-enrol__done-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 8px;
+}
