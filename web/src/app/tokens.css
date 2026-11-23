@@ -1,0 +1,36 @@
+/* Edutou dark theme, taken from the original Framer site: rgb(23,23,23) ground, rgb(255,77,0) orange */
+:root {
+  --bg: #171717;
+  --bg-2: #1c1c1c;
+  --bg-3: #232323;
+  --line: rgb(255 255 255 / 0.08);
+  --line-2: rgb(255 255 255 / 0.14);
+  --text: #fafafa;
+  --text-2: rgb(255 255 255 / 0.72);
+  --muted: rgb(255 255 255 / 0.5);
+  --accent: #ff4d00;
+  --accent-2: #ff5e00;
+  --accent-hover: #ff6a2b;
+  --accent-tint: #ffd2bd;
+  --accent-deep: #cc3d00;
+  --accent-brown: #3e2013;
+  --accent-soft: rgb(255 77 0 / 0.1);
+
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mark: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --text-display: clamp(2.6rem, 5.6vw + 0.5rem, 5.5rem);
+  --text-section: clamp(2rem, 3vw + 0.75rem, 3.5rem);
+  --text-title: 1.25rem;
+  --text-lead: clamp(1.0625rem, 0.4vw + 0.95rem, 1.25rem);
+
+  --radius: 24px;
+  --radius-sm: 14px;
+  --container: 1100px;
+  --gutter: 24px;
+  --section: 128px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --nav-h: 72px;
+}
+@media (max-width: 60rem) { :root { --section: 96px; } }
+@media (max-width: 40rem) { :root { --section: 72px; --gutter: 18px; --radius: 20px; } }
