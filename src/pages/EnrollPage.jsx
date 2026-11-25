@@ -192,19 +192,30 @@ export default function EnrollPage() {
               <aside className="edt-card edt-enrol__summary" aria-label="Selected programme">
                 {selected ? (
                   <>
-                    {selected.image?.url && (
-                      <img className="edt-enrol__img" src={selected.image.url} alt={selected.image.alt || ''} style={selected.image.focus ? { objectPosition: selected.image.focus } : undefined} />
-                    )}
-                    <ProgrammeBadges p={selected} />
-                    <p className="edt-enrol__cat">{categoryTitle(site, selected.category)}</p>
-                    <h2 className="edt-enrol__title">{selected.title}</h2>
-                    {[scheduleLabel(selected.schedule), selected.schedule?.duration, selected.schedule?.mode, selected.schedule?.language]
-                      .filter(Boolean)
-                      .map((x) => (
-                        <p key={x} className="edt-enrol__meta">
-                          {x}
-                        </p>
-                      ))}
+                    <div className="edt-enrol__head">
+                      {selected.image?.url && (
+                        <img
+                          className="edt-enrol__img"
+                          src={selected.image.url}
+                          alt={selected.image.alt || ''}
+                          style={selected.image.focus ? { objectPosition: selected.image.focus } : undefined}
+                        />
+                      )}
+                      <div className="edt-enrol__headtext">
+                        <ProgrammeBadges p={selected} />
+                        <p className="edt-enrol__cat">{categoryTitle(site, selected.category)}</p>
+                        <h2 className="edt-enrol__title">{selected.title}</h2>
+                      </div>
+                    </div>
+                    {(() => {
+                      const meta = [
+                        scheduleLabel(selected.schedule),
+                        selected.schedule?.duration,
+                        selected.schedule?.mode,
+                        selected.schedule?.language,
+                      ].filter(Boolean);
+                      return meta.length > 0 && <p className="edt-enrol__meta">{meta.join(' · ')}</p>;
+                    })()}
                     {selected.card.summary && <p className="edt-enrol__text">{selected.card.summary}</p>}
                     {selected.pricing?.model === 'paid' && selected.pricing.note && <p className="edt-enrol__meta">{selected.pricing.note}</p>}
                     {selected.pagePath && (
