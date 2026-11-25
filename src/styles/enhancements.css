@@ -436,3 +436,41 @@
 .framer-lmj2bl {
   display: none !important;
 }
+
+/* ---- Bento: keep the growth chart clear of the text ----
+ * "AI-Driven Personalization" (.framer-64b7uw). Its chart is a fixed 748x310
+ * drawing centred on the space left under the text, so on most widths its top
+ * half rose over the paragraph. Shifting the chart's container (which also
+ * holds the animated cursor, so the two stay aligned) puts the chart's top
+ * edge at the top of that space instead; the flat fill below is clipped by the
+ * card's rounded edge, as in the design.
+ */
+.framer-FwoPK .framer-64b7uw .framer-szx1vn {
+  top: max(0px, calc(155px - 51.8812%));
+}
+
+/* Phones: the paragraph wraps to many lines, so let the card grow with its
+ * text and give the chart its own band underneath. */
+@media (max-width: 809.98px) {
+  .framer-FwoPK .framer-64b7uw {
+    height: auto !important;
+  }
+  .framer-FwoPK .framer-64b7uw .framer-dm72fi {
+    flex: none;
+    height: 190px;
+  }
+}
+
+/* Tablets: the card keeps its grid height, so draw the chart (and its cursor)
+ * smaller to fit the whole line in the space under the text. */
+@media (min-width: 810px) and (max-width: 1199.98px) {
+  .framer-FwoPK .framer-64b7uw .framer-szx1vn {
+    transform: scale(0.68);
+    transform-origin: 50% 0;
+  }
+}
+@media (min-width: 810px) and (max-width: 999.98px) {
+  .framer-FwoPK .framer-64b7uw .framer-szx1vn {
+    transform: scale(0.5);
+  }
+}
