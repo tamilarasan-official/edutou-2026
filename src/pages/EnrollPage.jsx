@@ -1,11 +1,38 @@
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PageHero } from '../components/page/PageParts.jsx';
-import { ProgrammeBadges, SiteStatus } from '../components/page/Catalogue.jsx';
-import { API_URL, categoryTitle, scheduleLabel, useSite } from '../data/cms.js';
+import { Price, ProgrammeBadges, SiteStatus } from '../components/page/Catalogue.jsx';
+import { API_URL, categoryTitle, paysOnline, priceParts, scheduleLabel, useSite } from '../data/cms.js';
 import usePageTitle from './usePageTitle.js';
 
 const GENERAL = '';
+
+/** Load Razorpay Checkout once, on demand. */
+let checkoutScript = null;
+function loadRazorpay() {
+  if (window.Razorpay) return Promise.resolve(true);
+  checkoutScript ??= new Promise((resolve) => {
+    const s = document.createElement('script');
+    s.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    s.async = true;
+    s.onload = () => resolve(true);
+    s.onerror = () => {
+      checkoutScript = null;
+      resolve(false);
+    };
+    document.body.appendChild(s);
+  });
+  return checkoutScript;
+}
+
+async function postJson(path, data) {
+  const res = await fetch(`${API_URL}${path}`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  return { res, body: await res.json().catch(() => ({})) };
+}
 
 function Field({ id, label, error, children }) {
   return (
@@ -45,9 +72,66 @@ export default function EnrollPage() {
     setParams(next, { replace: true });
   };
 
+  const finish = (data, email) => {
+    setDone({
+      programme: data?.programme ?? null,
+      whatsapp: data?.whatsappGroupUrl || form?.whatsappGroupUrl || '',
+      email: data?.confirmationEmail ? email : '',
+      paid: Boolean(data?.paid),
+    });
+    setStatus('done');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  /** Open Razorpay for the order the API created; resolves when checkout ends. */
+  async function pay(payment, email) {
+    const ready = await loadRazorpay();
+    if (!ready) {
+      setErrors({ form: 'The payment window could not be loaded. Please check your connection and try again.' });
+      setStatus('idle');
+      return;
+    }
+    setStatus('paying');
+    const rzp = new window.Razorpay({
+      key: payment.keyId,
+      order_id: payment.orderId,
+      amount: payment.amount,
+      currency: payment.currency,
+      name: payment.name,
+      description: payment.description,
+      prefill: payment.prefill,
+      theme: { color: '#ff5e00' },
+      handler: async (resp) => {
+        setStatus('verifying');
+        try {
+          const { res, body } = await postJson('/api/cms/enrol/verify', {
+            orderId: resp.razorpay_order_id,
+            paymentId: resp.razorpay_payment_id,
+            signature: resp.razorpay_signature,
+          });
+          if (res.ok) return finish(body.data, email);
+          setErrors({ form: body.error?.message ?? 'We could not confirm your payment. Please contact us.' });
+        } catch {
+          setErrors({ form: 'Your payment went through but we could not confirm it right now. We will email you once it is confirmed.' });
+        }
+        setStatus('idle');
+      },
+      modal: {
+        ondismiss: () => {
+          setErrors({ form: 'Payment was not completed. You can try again; your details are saved.' });
+          setStatus('idle');
+        },
+      },
+    });
+    rzp.on('payment.failed', (r) => {
+      setErrors({ form: `Payment failed: ${r?.error?.description ?? 'please try again or use another method.'}` });
+    });
+    rzp.open();
+  }
+
   async function onSubmit(e) {
     e.preventDefault();
-    if (status === 'sending') return;
+    if (status !== 'idle') return;
     const data = Object.fromEntries(new FormData(e.currentTarget));
     for (const key of ['utm_source', 'utm_medium', 'utm_campaign']) data[key] = params.get(key) ?? '';
     data.programme = choice;
@@ -55,21 +139,10 @@ export default function EnrollPage() {
     setStatus('sending');
     setErrors({});
     try {
-      const res = await fetch(`${API_URL}/api/cms/enrol`, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      const body = await res.json().catch(() => ({}));
+      const { res, body } = await postJson('/api/cms/enrol', data);
       if (res.ok) {
-        setDone({
-          programme: body.data?.programme ?? null,
-          whatsapp: body.data?.whatsappGroupUrl || form?.whatsappGroupUrl || '',
-          email: body.data?.confirmationEmail ? data.email : '',
-        });
-        setStatus('done');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
+        if (body.data?.payment) return pay(body.data.payment, data.email);
+        return finish(body.data, data.email);
       }
       setErrors(body.error?.errors ?? { form: body.error?.message ?? 'Something went wrong. Please try again.' });
     } catch {
@@ -97,6 +170,7 @@ export default function EnrollPage() {
               </span>
               <h2>{form.successTitle}</h2>
               {done?.programme && done.programme !== 'General enquiry' && <p className="edt-enrol__for">{done.programme}</p>}
+              {done?.paid && <p className="edt-enrol__paid">Payment received ✓</p>}
               <p>{form.successMessage}</p>
               {done?.email && (
                 <p>
@@ -183,8 +257,16 @@ export default function EnrollPage() {
                   </p>
                 )}
 
-                <button type="submit" className="edt-btn edt-btn--primary edt-btn--block" disabled={status === 'sending'}>
-                  {status === 'sending' ? 'Submitting…' : form.buttonText}
+                <button type="submit" className="edt-btn edt-btn--primary edt-btn--block" disabled={status !== 'idle'}>
+                  {status === 'sending'
+                    ? 'Submitting…'
+                    : status === 'paying'
+                      ? 'Complete the payment…'
+                      : status === 'verifying'
+                        ? 'Confirming payment…'
+                        : paysOnline(selected)
+                          ? `Pay ${priceParts(selected.pricing)?.now} & enrol`
+                          : form.buttonText}
                 </button>
                 {form.privacyNote && <p className="edt-enrol__privacy">{form.privacyNote}</p>}
               </form>
@@ -217,7 +299,13 @@ export default function EnrollPage() {
                       return meta.length > 0 && <p className="edt-enrol__meta">{meta.join(' · ')}</p>;
                     })()}
                     {selected.card.summary && <p className="edt-enrol__text">{selected.card.summary}</p>}
-                    {selected.pricing?.model === 'paid' && selected.pricing.note && <p className="edt-enrol__meta">{selected.pricing.note}</p>}
+                    {selected.pricing?.model === 'paid' && (
+                      <div className="edt-enrol__price">
+                        <Price pricing={selected.pricing} />
+                        {selected.pricing.note && <span className="edt-enrol__meta">{selected.pricing.note}</span>}
+                        {paysOnline(selected) && <span className="edt-enrol__secure">Secure payment by Razorpay · UPI, cards, netbanking</span>}
+                      </div>
+                    )}
                     {selected.pagePath && (
                       <Link to={selected.pagePath} className="edt-enrol__more">
                         View full programme →

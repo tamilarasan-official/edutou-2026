@@ -39,7 +39,7 @@ function withPaths(data) {
     pagePath: p.data.page?.enabled ? `/programmes/${p.data.category}/${p.slug}` : null,
     enrolPath: `/enroll?programme=${encodeURIComponent(p.slug)}`,
   }));
-  return { categories, domains: data.domains, programmes, enrolForm: data.enrolForm };
+  return { categories, domains: data.domains, programmes, enrolForm: data.enrolForm, paymentsOnline: Boolean(data.paymentsOnline) };
 }
 
 export function loadSite() {
@@ -90,18 +90,41 @@ export const inCategory = (p, id) => p.category === id || (p.alsoIn ?? []).inclu
 
 export const categoryTitle = (site, id) => site.categories.find((c) => c.id === id)?.title ?? id;
 
-export function priceLabel(pricing) {
-  if (!pricing || pricing.model === 'hidden') return '';
-  if (pricing.model === 'free') return 'Free';
-  if (pricing.amount != null) {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: pricing.currency || 'INR',
-      maximumFractionDigits: 0,
-    }).format(pricing.amount);
-  }
-  return pricing.note || 'Paid';
+export function formatMoney(amount, currency = 'INR') {
+  return new Intl.NumberFormat(currency === 'USD' ? 'en-US' : 'en-IN', {
+    style: 'currency',
+    currency: currency || 'INR',
+    maximumFractionDigits: Number.isInteger(amount) ? 0 : 2,
+  }).format(amount);
 }
+
+/**
+ * Price parts for display: { now: '₹99', was: '₹199', off: 50 } for an offer,
+ * { now: '₹99' } normally, { now: 'Free' }, or null when the price is hidden.
+ */
+export function priceParts(pricing) {
+  if (!pricing || pricing.model === 'hidden') return null;
+  if (pricing.model === 'free') return { now: 'Free', free: true };
+  if (pricing.amount == null) return { now: pricing.note || 'Paid' };
+  const now = formatMoney(pricing.amount, pricing.currency);
+  if (pricing.showCompareAt && pricing.compareAtAmount != null && pricing.compareAtAmount > pricing.amount) {
+    return {
+      now,
+      was: formatMoney(pricing.compareAtAmount, pricing.currency),
+      off: Math.round((1 - pricing.amount / pricing.compareAtAmount) * 100),
+    };
+  }
+  return { now };
+}
+
+/** Plain text, e.g. "₹99" (used where markup is not wanted). */
+export function priceLabel(pricing) {
+  return priceParts(pricing)?.now ?? '';
+}
+
+/** True when the enrol page should take payment with Razorpay. */
+export const paysOnline = (p) =>
+  Boolean(state.paymentsOnline) && p?.pricing?.model === 'paid' && p.pricing.amount > 0 && Boolean(p.payment?.collectOnline);
 
 /** "12 Dec 2026 · 7:00 PM IST" from a schedule, or '' when nothing is set. */
 export function scheduleLabel(s) {

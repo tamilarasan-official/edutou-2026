@@ -2,15 +2,34 @@ import { useEffect, useMemo, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { SectionHead } from './PageParts.jsx';
 import { ArrowUpRight } from '../layout/icons.jsx';
-import { categoryTitle, inCategory, priceLabel, retrySite, scheduleLabel, useSite } from '../../data/cms.js';
+import { categoryTitle, inCategory, priceParts, retrySite, scheduleLabel, useSite } from '../../data/cms.js';
 
 /** Type + price badges (e.g. "Webinar", "Free" / "₹4,999"). */
+/** Price as shown to visitors: "₹99", or "₹99 ~~₹199~~ 50% off" for an offer. */
+export function Price({ pricing, className = '' }) {
+  const p = priceParts(pricing);
+  if (!p) return null;
+  return (
+    <span className={`edt-price ${className}`}>
+      <span className={`edt-badge ${p.free ? 'edt-badge--free' : 'edt-badge--paid'}`}>{p.now}</span>
+      {p.was && (
+        <>
+          <s className="edt-price__was" aria-label={`was ${p.was}`}>
+            {p.was}
+          </s>
+          {p.off > 0 && <span className="edt-badge edt-badge--free">{p.off}% off</span>}
+        </>
+      )}
+    </span>
+  );
+}
+
+/** Type + price badges (e.g. "Webinar", "Free" / "₹99 ~~₹199~~"). */
 export function ProgrammeBadges({ p, className = '' }) {
-  const price = priceLabel(p.pricing);
   return (
     <span className={`edt-prog__badges ${className}`}>
       {p.type && <span className="edt-badge edt-badge--type">{p.type}</span>}
-      {price && <span className={`edt-badge ${p.pricing.model === 'free' ? 'edt-badge--free' : 'edt-badge--paid'}`}>{price}</span>}
+      <Price pricing={p.pricing} />
     </span>
   );
 }

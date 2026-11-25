@@ -1413,3 +1413,30 @@ select.edt-input option {
     overflow: hidden;
   }
 }
+
+/* Price with an optional crossed-out original price */
+.edt-price {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.edt-price__was {
+  color: var(--edt-faint);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.edt-enrol__price {
+  display: grid;
+  gap: 6px;
+  margin-top: 4px;
+}
+.edt-enrol__secure {
+  font-size: 12px;
+  color: var(--edt-faint);
+}
+.edt-enrol__paid {
+  font-weight: 700;
+  color: rgb(74, 222, 128) !important;
+}
