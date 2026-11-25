@@ -62,7 +62,11 @@ export default function EnrollPage() {
       });
       const body = await res.json().catch(() => ({}));
       if (res.ok) {
-        setDone(body.data?.programme ?? null);
+        setDone({
+          programme: body.data?.programme ?? null,
+          whatsapp: body.data?.whatsappGroupUrl || form?.whatsappGroupUrl || '',
+          email: body.data?.confirmationEmail ? data.email : '',
+        });
         setStatus('done');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
@@ -92,11 +96,16 @@ export default function EnrollPage() {
                 ✓
               </span>
               <h2>{form.successTitle}</h2>
-              {done && done !== 'General enquiry' && <p className="edt-enrol__for">{done}</p>}
+              {done?.programme && done.programme !== 'General enquiry' && <p className="edt-enrol__for">{done.programme}</p>}
               <p>{form.successMessage}</p>
+              {done?.email && (
+                <p>
+                  A confirmation email is on its way to <strong>{done.email}</strong>.
+                </p>
+              )}
               <div className="edt-enrol__done-actions">
-                {form.whatsappGroupUrl && (
-                  <a className="edt-btn edt-btn--primary" href={form.whatsappGroupUrl}>
+                {done?.whatsapp && (
+                  <a className="edt-btn edt-btn--primary" href={done.whatsapp} target="_blank" rel="noreferrer">
                     Join the WhatsApp group
                   </a>
                 )}
