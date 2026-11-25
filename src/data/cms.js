@@ -1,6 +1,7 @@
 // Programme content comes from the CMS (admin.edutou.in) through the Edutou API.
 // It is fetched once per visit and shared by every component through useSite().
 import { useSyncExternalStore } from 'react';
+import { initClarity } from './analytics.js';
 
 export const API_URL = (import.meta.env.VITE_API_URL || 'https://api.edutou.in').replace(/\/+$/, '');
 
@@ -39,6 +40,7 @@ function withPaths(data) {
     pagePath: p.data.page?.enabled ? `/programmes/${p.data.category}/${p.slug}` : null,
     enrolPath: `/enroll?programme=${encodeURIComponent(p.slug)}`,
   }));
+  initClarity(data.analytics?.clarityProjectId);
   return { categories, domains: data.domains, programmes, enrolForm: data.enrolForm, paymentsOnline: Boolean(data.paymentsOnline) };
 }
 

@@ -1,9 +1,11 @@
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { CtaBand, PageHero, SectionHead } from '../components/page/PageParts.jsx';
 import { ProgrammeBadges } from '../components/page/Catalogue.jsx';
 import { ArrowUpRight } from '../components/layout/icons.jsx';
 import { categoryTitle, inCategory, scheduleLabel, useSite } from '../data/cms.js';
 import NotFoundPage from './NotFoundPage.jsx';
+import { track } from '../data/analytics.js';
 import usePageTitle from './usePageTitle.js';
 
 const pad = (n) => String(n).padStart(2, '0');
@@ -209,6 +211,9 @@ export default function ProgrammePage() {
   const site = useSite();
   const p = site.programmes.find((x) => x.slug === programme && x.page?.enabled && inCategory(x, format));
   usePageTitle(p ? p.title : site.status === 'ready' ? 'Page not found' : 'Programmes');
+  useEffect(() => {
+    if (p) track('programme_viewed', { programme: p.slug });
+  }, [p?.slug]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!p) return site.status === 'ready' || site.status === 'error' ? <NotFoundPage /> : <div className="edt-section" aria-busy="true" />;
 

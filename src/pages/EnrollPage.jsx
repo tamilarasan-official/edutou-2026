@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { PageHero } from '../components/page/PageParts.jsx';
 import { Price, ProgrammeBadges, SiteStatus } from '../components/page/Catalogue.jsx';
 import { API_URL, categoryTitle, paysOnline, priceParts, scheduleLabel, useSite } from '../data/cms.js';
+import { track } from '../data/analytics.js';
 import usePageTitle from './usePageTitle.js';
 
 const GENERAL = '';
@@ -73,6 +74,7 @@ export default function EnrollPage() {
   };
 
   const finish = (data, email) => {
+    track(data?.paid ? 'payment_completed' : 'enrol_completed', { programme: choice || 'general' });
     setDone({
       programme: data?.programme ?? null,
       whatsapp: data?.whatsappGroupUrl || form?.whatsappGroupUrl || '',
@@ -92,6 +94,7 @@ export default function EnrollPage() {
       return;
     }
     setStatus('paying');
+    track('payment_started', { programme: choice });
     const rzp = new window.Razorpay({
       key: payment.keyId,
       order_id: payment.orderId,
@@ -118,12 +121,14 @@ export default function EnrollPage() {
       },
       modal: {
         ondismiss: () => {
+          track('payment_cancelled', { programme: choice });
           setErrors({ form: 'Payment was not completed. You can try again; your details are saved.' });
           setStatus('idle');
         },
       },
     });
     rzp.on('payment.failed', (r) => {
+      track('payment_failed', { programme: choice });
       setErrors({ form: `Payment failed: ${r?.error?.description ?? 'please try again or use another method.'}` });
     });
     rzp.open();
@@ -138,6 +143,7 @@ export default function EnrollPage() {
 
     setStatus('sending');
     setErrors({});
+    track('enrol_submitted', { programme: choice || 'general' });
     try {
       const { res, body } = await postJson('/api/cms/enrol', data);
       if (res.ok) {
