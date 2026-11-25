@@ -626,6 +626,12 @@
   font-size: 15px;
   line-height: 1.6;
 }
+.edt-footer__contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
 .edt-footer__mail {
   display: inline-flex;
   align-items: center;

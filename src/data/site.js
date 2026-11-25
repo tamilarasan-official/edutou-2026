@@ -1,6 +1,7 @@
 // Site-wide content for the Edutou-specific sections.
 
-export const CONTACT_EMAIL = 'info@edutou.in';
+export const CONTACT_EMAIL = 'contact@edutou.in';
+export const CONTACT_PHONE = '+91 63853 15565';
 
 export const institutions = ['Saveetha University', 'Madras Engineering College'];
 

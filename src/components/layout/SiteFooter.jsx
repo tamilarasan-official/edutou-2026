@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import Logo from './Logo.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
-import { Mail } from './icons.jsx';
-import { CONTACT_EMAIL } from '../../data/site.js';
+import { Mail, Phone } from './icons.jsx';
+import { CONTACT_EMAIL, CONTACT_PHONE } from '../../data/site.js';
 import { aboutLinks, careerLinks, utilityNav } from '../../data/navigation.js';
 import { useSite } from '../../data/cms.js';
 
@@ -24,11 +24,18 @@ export default function SiteFooter() {
         <div className="edt-footer__brand">
           <Logo />
           <p>AI-powered, hands-on learning that turns skills into careers. For learners, institutions and industry.</p>
-          {CONTACT_EMAIL && (
-            <a className="edt-footer__mail" href={`mailto:${CONTACT_EMAIL}`}>
-              <Mail /> {CONTACT_EMAIL}
-            </a>
-          )}
+          <div className="edt-footer__contact">
+            {CONTACT_EMAIL && (
+              <a className="edt-footer__mail" href={`mailto:${CONTACT_EMAIL}`}>
+                <Mail /> {CONTACT_EMAIL}
+              </a>
+            )}
+            {CONTACT_PHONE && (
+              <a className="edt-footer__mail" href={`tel:${CONTACT_PHONE.replace(/\s+/g, '')}`}>
+                <Phone /> {CONTACT_PHONE}
+              </a>
+            )}
+          </div>
         </div>
         {COLUMNS.map((col) => (
           <nav key={col.title} className="edt-footer__col" aria-label={col.title}>
