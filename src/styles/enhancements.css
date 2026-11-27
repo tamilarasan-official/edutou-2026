@@ -474,3 +474,63 @@
     transform: scale(0.5);
   }
 }
+
+/* ---- Homepage values list ("Driven by values! Guided by vision!") ----
+ * Replaces two space-padded text lines with a list that wraps on any width.
+ */
+.edt-values-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  width: 100%;
+}
+.edt-values-list--left {
+  justify-content: flex-start;
+}
+.edt-values-list--center {
+  /* Phone layout: one value per line, centred under the heading. */
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.edt-values-list li {
+  /* Framer's text preset indents list items; this list has its own bullet. */
+  padding-left: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  white-space: nowrap;
+}
+.edt-values-list li::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: rgb(255, 94, 0);
+}
+@media (max-width: 400px) {
+  .edt-values-list {
+    gap: 8px 16px;
+  }
+  .edt-values-list li {
+    white-space: normal;
+  }
+}
+
+/* "Learn Smarter. Progress Faster. Achieve More." under Smart Learning Intelligence */
+.edt-tagline,
+.edt-tagline .framer-text {
+  color: rgb(255, 94, 0) !important;
+}
+
+/* Desktop: the list's container shrinks to fit and is centred by its parent;
+ * stretch it so the list lines up with the heading's left edge. */
+.framer-FwoPK .framer-1q9ne7l:has(.edt-values-list--left) {
+  align-self: stretch;
+  width: 100%;
+}

@@ -40,7 +40,7 @@ export const career = [
   },
 ];
 
-export const values = ['Adaptability', 'Practicality', 'Community', 'Future-Readiness'];
+export const values = ['Innovation & Adaptability', 'Practical Learning', 'Collaborative Growth', 'Future-Ready Excellence'];
 
 export const about = {
   story: {

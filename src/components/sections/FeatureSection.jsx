@@ -320,9 +320,9 @@ export default function FeatureSection() {
                       dir="auto"
                       style={{ '--framer-text-alignment': 'left' }}
                     >
-                      <strong className="framer-text">
-                        {'AI analyzes your progress and learning patterns to reduce struggle and boost mastery.'}
-                      </strong>
+                      {
+                        "EDUTOU leverages AI-powered learning intelligence to understand each learner's progress, recognize individual strengths and identify areas that need improvement."
+                      }
                     </p>
                     <p
                       className="framer-text framer-styles-preset-4mzurx"
@@ -331,8 +331,16 @@ export default function FeatureSection() {
                       style={{ '--framer-text-alignment': 'left' }}
                     >
                       {
-                        'Edutou continuously tracks your performance, identifies weak areas, and adjusts lessons, practice tasks, and projects instantly. This ensures you stay challenged where needed and supported where it matters most.'
+                        "By continuously analyzing learning patterns and performance, our smart learning system dynamically adapts lessons, practice activities and project recommendations to suit each learner's needs. This ensures a personalized learning journey that keeps learners engaged, challenges them to achieve more and provides the right support at every step."
                       }
+                    </p>
+                    <p
+                      className="framer-text framer-styles-preset-4mzurx edt-tagline"
+                      data-styles-preset="C5Bqm4Y89"
+                      dir="auto"
+                      style={{ '--framer-text-alignment': 'left' }}
+                    >
+                      <strong className="framer-text">{'Learn Smarter. Progress Faster. Achieve More.'}</strong>
                     </p>
                   </div>
                 </div>
@@ -364,9 +372,9 @@ export default function FeatureSection() {
                       dir="auto"
                       style={{ '--framer-text-alignment': 'center' }}
                     >
-                      <strong className="framer-text">
-                        {'AI analyzes your progress and learning patterns to reduce struggle and boost mastery.'}
-                      </strong>
+                      {
+                        "EDUTOU leverages AI-powered learning intelligence to understand each learner's progress, recognize individual strengths and identify areas that need improvement."
+                      }
                     </p>
                     <p
                       className="framer-text framer-styles-preset-4mzurx"
@@ -375,8 +383,16 @@ export default function FeatureSection() {
                       style={{ '--framer-text-alignment': 'center' }}
                     >
                       {
-                        'Edutou continuously tracks your performance, identifies weak areas, and adjusts lessons, practice tasks, and projects instantly. This ensures you stay challenged where needed and supported where it matters most.'
+                        "By continuously analyzing learning patterns and performance, our smart learning system dynamically adapts lessons, practice activities and project recommendations to suit each learner's needs. This ensures a personalized learning journey that keeps learners engaged, challenges them to achieve more and provides the right support at every step."
                       }
+                    </p>
+                    <p
+                      className="framer-text framer-styles-preset-4mzurx edt-tagline"
+                      data-styles-preset="C5Bqm4Y89"
+                      dir="auto"
+                      style={{ '--framer-text-alignment': 'center' }}
+                    >
+                      <strong className="framer-text">{'Learn Smarter. Progress Faster. Achieve More.'}</strong>
                     </p>
                   </div>
                 </div>

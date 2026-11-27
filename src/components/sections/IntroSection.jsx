@@ -102,27 +102,26 @@ export default function IntroSection() {
               >
                 <div className="framer-18lr4bt" data-framer-name="Heading" style={{ transform: 'none' }}>
                   <h2 className="framer-text framer-styles-preset-163xgy6" data-styles-preset="EEpMe6lZZ" dir="auto">
-                    {'From '}
-                    <strong className="framer-text">{'Values & Philosophy'}</strong>
+                    {'Driven by values!'}
+                    <br className="framer-text" />
+                    <strong className="framer-text">{'Guided by vision!'}</strong>
                   </h2>
                 </div>
                 <div className="framer-1q9ne7l" data-framer-name="Supporting Text" style={{ transform: 'none' }}>
-                  <p
-                    className="framer-text framer-styles-preset-m4awkb"
-                    data-styles-preset="YqcGXulro"
-                    dir="auto"
-                    style={{ '--framer-text-alignment': 'left' }}
-                  >
-                    {'Adaptability   Practicality'}
-                  </p>
-                  <p
-                    className="framer-text framer-styles-preset-m4awkb"
-                    data-styles-preset="YqcGXulro"
-                    dir="auto"
-                    style={{ '--framer-text-alignment': 'left' }}
-                  >
-                    {'Community    Future‑Readiness'}
-                  </p>
+                  <ul className="edt-values-list edt-values-list--left" aria-label="Our values">
+                    <li className="framer-text framer-styles-preset-m4awkb" data-styles-preset="YqcGXulro">
+                      {'Innovation & Adaptability'}
+                    </li>
+                    <li className="framer-text framer-styles-preset-m4awkb" data-styles-preset="YqcGXulro">
+                      {'Practical Learning'}
+                    </li>
+                    <li className="framer-text framer-styles-preset-m4awkb" data-styles-preset="YqcGXulro">
+                      {'Collaborative Growth'}
+                    </li>
+                    <li className="framer-text framer-styles-preset-m4awkb" data-styles-preset="YqcGXulro">
+                      {'Future-Ready Excellence'}
+                    </li>
+                  </ul>
                 </div>
               </div>
               <div
@@ -258,27 +257,26 @@ export default function IntroSection() {
                     dir="auto"
                     style={{ '--framer-text-alignment': 'center' }}
                   >
-                    {'From '}
-                    <strong className="framer-text">{'Values & Philosophy'}</strong>
+                    {'Driven by values!'}
+                    <br className="framer-text" />
+                    <strong className="framer-text">{'Guided by vision!'}</strong>
                   </h2>
                 </div>
                 <div className="framer-1q9ne7l" data-framer-name="Supporting Text" style={{ transform: 'none' }}>
-                  <p
-                    className="framer-text framer-styles-preset-m4awkb"
-                    data-styles-preset="YqcGXulro"
-                    dir="auto"
-                    style={{ '--framer-text-alignment': 'left' }}
-                  >
-                    {'Adaptability   Practicality'}
-                  </p>
-                  <p
-                    className="framer-text framer-styles-preset-m4awkb"
-                    data-styles-preset="YqcGXulro"
-                    dir="auto"
-                    style={{ '--framer-text-alignment': 'left' }}
-                  >
-                    {'Community    Future‑Readiness'}
-                  </p>
+                  <ul className="edt-values-list edt-values-list--center" aria-label="Our values">
+                    <li className="framer-text framer-styles-preset-m4awkb" data-styles-preset="YqcGXulro">
+                      {'Innovation & Adaptability'}
+                    </li>
+                    <li className="framer-text framer-styles-preset-m4awkb" data-styles-preset="YqcGXulro">
+                      {'Practical Learning'}
+                    </li>
+                    <li className="framer-text framer-styles-preset-m4awkb" data-styles-preset="YqcGXulro">
+                      {'Collaborative Growth'}
+                    </li>
+                    <li className="framer-text framer-styles-preset-m4awkb" data-styles-preset="YqcGXulro">
+                      {'Future-Ready Excellence'}
+                    </li>
+                  </ul>
                 </div>
               </div>
               <div
