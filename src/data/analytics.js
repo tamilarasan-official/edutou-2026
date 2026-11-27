@@ -30,6 +30,10 @@ export function initGoogleTag(tagId) {
   if (typeof window === 'undefined' || !tagId || googleId) return;
   if (!/^(GTM|G|AW)-[A-Z0-9]{4,16}$/.test(tagId)) return;
   googleId = tagId;
+  // index.html already carries the tag (Google needs it in the raw HTML to
+  // verify the install); never load the same tag twice.
+  const already = [...document.scripts].some((s) => s.src.includes(`id=${tagId}`));
+  if (already) return;
   window.dataLayer = window.dataLayer || [];
   window.gtag = function gtag() {
     window.dataLayer.push(arguments);
