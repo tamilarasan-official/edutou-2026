@@ -1,6 +1,6 @@
-// Microsoft Clarity (session recordings, heatmaps, insights). The project id is
-// managed in admin.edutou.in > Analytics & Event Tracking and arrives with the
-// site content; nothing loads when it is empty (switched off).
+// Website analytics, managed in admin.edutou.in > Analytics & Event Tracking:
+// Microsoft Clarity (recordings, heatmaps) and the Google tag (Tag Manager /
+// Google Analytics). IDs arrive with the site content; an empty ID means off.
 
 let loadedId = null;
 
@@ -23,14 +23,43 @@ export function initClarity(projectId) {
   })(window, document, 'clarity', 'script', projectId);
 }
 
+let googleId = null;
+
+/** Google tag, as in Google's install snippet (GTM-… container, or G-… / AW-… directly). */
+export function initGoogleTag(tagId) {
+  if (typeof window === 'undefined' || !tagId || googleId) return;
+  if (!/^(GTM|G|AW)-[A-Z0-9]{4,16}$/.test(tagId)) return;
+  googleId = tagId;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function gtag() {
+    window.dataLayer.push(arguments);
+  };
+  window.gtag('js', new Date());
+  const isContainer = tagId.startsWith('GTM-');
+  if (!isContainer) window.gtag('config', tagId);
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = isContainer
+    ? `https://www.googletagmanager.com/gtm.js?id=${tagId}`
+    : `https://www.googletagmanager.com/gtag/js?id=${tagId}`;
+  document.head.appendChild(s);
+}
+
 /**
- * Custom event for Clarity, e.g. track('enrol_completed', { programme: slug }).
- * Tags make recordings filterable by programme; calls before Clarity loads are queued.
+ * Custom event, e.g. track('enrol_completed', { programme: slug }).
+ * Clarity: tags make recordings filterable by programme. Google: pushed to the
+ * dataLayer as { event, programme }, usable as a Tag Manager trigger or a GA4
+ * event. Calls before either script loads are queued.
  */
 export function track(event, tags = {}) {
-  if (typeof window === 'undefined' || typeof window.clarity !== 'function') return;
-  for (const [key, value] of Object.entries(tags)) {
-    if (value) window.clarity('set', key, String(value).slice(0, 255));
+  if (typeof window === 'undefined') return;
+  if (typeof window.clarity === 'function') {
+    for (const [key, value] of Object.entries(tags)) {
+      if (value) window.clarity('set', key, String(value).slice(0, 255));
+    }
+    window.clarity('event', event);
   }
-  window.clarity('event', event);
+  if (googleId && Array.isArray(window.dataLayer)) {
+    window.dataLayer.push({ event, ...tags });
+  }
 }
